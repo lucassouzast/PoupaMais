@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import * as C from './App.styles';
 import {Item} from './types/Item';
-import {Category} from './types/Category';
 import {categories} from './data/categories';
 import {items} from './data/items';
 import {filterListByMonth, getCurrentMonth} from './helpers/dateFilters'
 import { TableArea } from './components/TableArea';
 import { InfoArea } from './components/InfoArea';
 import { InputArea } from './components/InputArea';
-
+import './App.css'
 
 const App = () => {
 
@@ -50,9 +49,9 @@ const App = () => {
 
   return (
     <C.Container>
-      <C.Header>
+      <div className='h-[150px] text-center bg-blue-500'>
         <C.HeaderText>Sistema Financeiro</C.HeaderText>
-      </C.Header>
+      </div>
       <C.Body>
 
         <InfoArea 
