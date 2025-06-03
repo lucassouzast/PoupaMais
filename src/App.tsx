@@ -1,27 +1,37 @@
-import { useState, useEffect } from 'react';
-import * as C from './App.styles';
-import {Item} from './types/Item';
-import {categories} from './data/categories';
-import {items} from './data/items';
-import {filterListByMonth, getCurrentMonth} from './helpers/dateFilters'
-import { TableArea } from './components/TableArea';
-import { InfoArea } from './components/InfoArea';
-import { InputArea } from './components/InputArea';
-import './App.css'
+import { useState, useEffect } from "react";
+import * as C from "./App.styles";
+import { Item } from "./types/Item";
+import { categories } from "./data/categories";
+import { items } from "./data/items";
+import { filterListByMonth, getCurrentMonth } from "./helpers/dateFilters";
+import { TableArea } from "./components/TableArea";
+import { InfoArea } from "./components/InfoArea";
+import { InputArea } from "./components/InputArea";
+
+import "./App.css";
+import { getAllEntries } from "./services/entries.services";
+import Modal from "./components/Modal";
 
 const App = () => {
-
-  const [list, setList] = useState(items);
-  const [filteredList, setFilteredList] = useState<Item[]>([])
+  const [list, setList] = useState<Item[]>([]);
+  const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
 
-  useEffect(()=>{
-    setFilteredList(filterListByMonth(list, currentMonth))
-  }, [list, currentMonth])
+  const [item, setItem] = useState<Item | null>(null);
 
-  useEffect(()=>{
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    getEntries();
+  }, []);
+
+  useEffect(() => {
+    setFilteredList(filterListByMonth(list, currentMonth));
+  }, [list, currentMonth]);
+
+  useEffect(() => {
     let incomeCount = 0;
     let expenseCount = 0;
 
@@ -34,41 +44,72 @@ const App = () => {
     }
     setIncome(incomeCount);
     setExpense(expenseCount);
-
   }, [filteredList]);
 
-  const handleMonthChange = (newMonth: string) =>{
+  const handleMonthChange = (newMonth: string) => {
     setCurrentMonth(newMonth);
-  }
+    console.log(currentMonth);
+  };
 
-  const handleAddItem = (item: Item) => {
-    let newList = [...list]
-    newList.push(item);
-    setList(newList);
-  }
+  const handleAddItem = () => {
+    getEntries();
+    setIsOpen(false);
+    setItem(null);
+  };
+
+  const getEntries = () => {
+    getAllEntries().then((res) => {
+      if (res?.data?.length) {
+        let arr: any = [];
+        res.data.map((item: any) => {
+          arr.push({
+            ...item,
+            date: new Date(item.date),
+          });
+        });
+        setList(arr);
+      } else {
+        setList([]);
+      }
+    });
+  };
 
   return (
     <C.Container>
-      <div className='h-[150px] text-center bg-blue-500'>
+      <div className="h-[150px] text-center bg-blue-500">
         <C.HeaderText>Sistema Financeiro</C.HeaderText>
       </div>
       <C.Body>
-
-        <InfoArea 
+        <InfoArea
           currentMonth={currentMonth}
           onMonthChange={handleMonthChange}
           income={income}
           expense={expense}
         />
 
-        <InputArea onAdd={handleAddItem}/>
-
-        <TableArea list={filteredList}/>
-
+        <InputArea onAdd={handleAddItem} />
+        <TableArea
+          list={filteredList}
+          handleDelItem={(id: string) => {
+            console.log(id);
+          }}
+          handleEditItem={(item: Item) => {
+            setIsOpen(true);
+            setItem(item);
+          }}
+        />
       </C.Body>
-
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        title="Editar Item"
+      >
+        <div>
+          <InputArea item={item} onAdd={handleAddItem} />
+        </div>
+      </Modal>
     </C.Container>
-  )
-}
+  );
+};
 
 export default App;

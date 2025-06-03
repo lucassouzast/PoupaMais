@@ -1,29 +1,43 @@
-import * as C from './styles'
-import {Item} from '../../types/Item'
-import { formatDate } from '../../helpers/dateFilters'
-import {categories} from '../../data/categories'
+import * as C from "./styles";
+import { Item } from "../../types/Item";
+import { formatDate } from "../../helpers/dateFilters";
+import { categories } from "../../data/categories";
+
 
 type Props = {
-    item: Item
-}
+  item: Item;
+  updateFunction: (item: Item) => void;
+
+  deleteFunction: (id: string) => void;
+};
+
+export const TableItem = ({ item, updateFunction, deleteFunction }: Props) => {
 
 
-export const TableItem = ({item}: Props) => {
-    return (
-        <C.TableLine>
-            <C.TableColumn>{formatDate(item.date)}</C.TableColumn>
-            <C.TableColumn>
-                <C.Category color={categories[item.category].color}>
-                    {categories[item.category].title}
-                </C.Category>
-            </C.TableColumn>
-            <C.TableColumn>{item.title}</C.TableColumn>
-            <C.TableColumn>
-                <C.Value color = {categories[item.category].expense ? 'red' : 'green'}>
-                    R$ ${item.value }
-                </C.Value>
+  return (
+    <C.TableLine>
+      <C.TableColumn>{formatDate(item.date)}</C.TableColumn>
+      <C.TableColumn>
+        <C.Category color={categories[item.category].color}>
+          {categories[item.category].title}
+        </C.Category>
+      </C.TableColumn>
+      <C.TableColumn>{item.title}</C.TableColumn>
 
-            </C.TableColumn>
-        </C.TableLine>
-    );
-}
+      <C.TableColumn>
+        <C.Value color={categories[item.category].expense ? "red" : "green"}>
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(item.value)}
+        </C.Value>
+      </C.TableColumn>
+      <C.TableColumn>
+        <C.IconButton onClick={() => updateFunction(item)}>✏️</C.IconButton>
+        <C.IconButton onClick={() => deleteFunction(item?._id || "")}>
+          🗑️
+        </C.IconButton>
+      </C.TableColumn>
+    </C.TableLine>
+  );
+};
