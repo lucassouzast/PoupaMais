@@ -54,5 +54,7 @@ Este projeto está licenciado sob a MIT License.
 👨‍💻 Desenvolvedor
 Feito com dedicação por Lucas Souza
 
+## 📌 Roadmap
 
-Se quiser, posso também te gerar o arquivo `README.md` e te enviar compactado. Deseja isso ou já v
+Você pode acompanhar o progresso e o planejamento futuro deste projeto no arquivo [ROADMAP.md](./ROADMAP.md).
+
