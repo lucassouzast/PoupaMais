@@ -1,0 +1,58 @@
+# 💰 Dev Finance
+
+Aplicação web de controle financeiro pessoal, desenvolvida com React e TypeScript. Com uma interface moderna e funcional, permite registrar entradas e saídas, calcular saldos automaticamente e visualizar os dados por mês.
+
+---
+
+## 🚀 Sobre o Projeto
+
+O **Dev Finance** é um gerenciador financeiro pessoal simples e eficiente. Ideal para quem deseja acompanhar seus gastos e receitas mensalmente, com uma navegação fluida e visual amigável.
+
+> Esta é uma versão em desenvolvimento, com novas funcionalidades sendo planejadas e implementadas.
+
+---
+
+## ✨ Funcionalidades Atuais
+
+- ✅ Registro de receitas e despesas  
+- ✅ Filtro de transações por mês  
+- ✅ Cálculo automático de saldo total, entradas e saídas  
+- ✅ Interface limpa e responsiva  
+
+---
+
+## 🔧 Tecnologias Utilizadas
+
+- React  
+- TypeScript  
+- Vite  
+- Tailwind CSS
+- CSS Modules  
+
+---
+
+## 🛠 Como Rodar Localmente
+
+```bash
+git clone https://github.com/lucassouzast/dev-finance.git
+cd dev-finance
+npm install
+npm run dev
+
+🌱 Próximas Funcionalidades
+💾 Salvamento de dados com banco de dados
+
+📱 Melhor responsividade
+
+🌙 Modo escuro
+
+🔒 Login e autenticação
+
+📄 Licença
+Este projeto está licenciado sob a MIT License.
+
+👨‍💻 Desenvolvedor
+Feito com dedicação por Lucas Souza
+
+
+Se quiser, posso também te gerar o arquivo `README.md` e te enviar compactado. Deseja isso ou já v
