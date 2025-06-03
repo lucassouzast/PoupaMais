@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
-export const TableLine = styled.tr``;
+export const TableLine = styled.tr`
+    padding-left: 10px;
+    border-bottom: 1px solid #ccc;
+`;
 
 export const TableColumn = styled.td`
-  padding: 10px 0;
+  padding: 20px;
 `;
 
 export const Category = styled.div<{ color: string }>`

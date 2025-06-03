@@ -33,6 +33,11 @@ export const InputArea = ({ onAdd, item }: Props) => {
     } else {
       createEntry(newItem).then((res) => {
         onAdd();
+        setValueField("");
+        setTitleField("");
+        setCategoryField("");
+        setDateField("");
+        alert("Item adicionado com sucesso!");
       });
     }
   };

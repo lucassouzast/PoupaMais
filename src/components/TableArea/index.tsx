@@ -19,7 +19,7 @@ export const TableArea = ({ list, handleDelItem, handleEditItem }: Props) => {
           <C.TableHeadColumn width={130}>Categoria</C.TableHeadColumn>
           <C.TableHeadColumn>Título</C.TableHeadColumn>
           <C.TableHeadColumn width={150}>Valor</C.TableHeadColumn>
-          <C.TableHeadColumn width={150}>...</C.TableHeadColumn>
+          <C.TableHeadColumn width={200}>...</C.TableHeadColumn>
         </tr>
       </thead>
       <tbody>
