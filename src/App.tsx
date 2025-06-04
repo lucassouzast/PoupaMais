@@ -76,9 +76,9 @@ const App = () => {
 
   return (
     <C.Container>
-      <div className="h-[150px] text-center bg-blue-500">
+      <C.Header>
         <C.HeaderText>Sistema Financeiro</C.HeaderText>
-      </div>
+      </C.Header>
       <C.Body>
         <InfoArea
           currentMonth={currentMonth}

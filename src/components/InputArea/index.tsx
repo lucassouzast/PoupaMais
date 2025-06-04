@@ -27,7 +27,7 @@ export const InputArea = ({ onAdd, item }: Props) => {
       value: parseFloat(valueField),
     };
     if (item) {
-        updateEntry(item._id || "", newItem).then((res) => {
+      updateEntry(item._id || "", newItem).then((res) => {
         onAdd();
       });
     } else {
@@ -61,19 +61,19 @@ export const InputArea = ({ onAdd, item }: Props) => {
 
   return (
     <C.Container>
-      <label htmlFor="inputDate">
-        Data: <br />
-        <input
+      <C.Label htmlFor="inputDate">
+        Data:
+        <C.Input
           type="date"
+          id="inputDate"
           value={dateField}
           onChange={(e) => setDateField(e.target.value)}
         />
-      </label>
+      </C.Label>
 
-      <label htmlFor="select">
-        Categoria: <br />
-        <select
-          name=""
+      <C.Label htmlFor="select">
+        Categoria:
+        <C.Select
           id="select"
           required
           value={categoryField}
@@ -85,36 +85,35 @@ export const InputArea = ({ onAdd, item }: Props) => {
               {categories[key].title}
             </option>
           ))}
-        </select>
-      </label>
-      <label htmlFor="inputTitle">
-        Titulo: <br />
-        <input
+        </C.Select>
+      </C.Label>
+
+      <C.Label htmlFor="title">
+        Título:
+        <C.Input
           type="text"
           id="title"
           value={titleField}
           onChange={(e) => setTitleField(e.target.value)}
         />
-      </label>
-      <label htmlFor="inputValue">
-        Valor: <br />
-        <input
+      </C.Label>
+
+      <C.Label htmlFor="value">
+        Valor:
+        <C.Input
           type="number"
           id="value"
           value={valueField}
           onChange={(e) => setValueField(e.target.value)}
         />
-      </label>
-      <label htmlFor="">
+      </C.Label>
+
+      <C.Label>
         <br />
-        <button
-          className="submit submit2"
-          type="submit"
-          onClick={inputValidation}
-        >
+        <C.Button type="button" onClick={inputValidation}>
           {item ? "Atualizar" : "Adicionar"}
-        </button>
-      </label>
+        </C.Button>
+      </C.Label>
     </C.Container>
   );
 };

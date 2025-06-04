@@ -1,8 +1,8 @@
 import * as C from "./styles";
 import { Item } from "../../types/Item";
 import { TableItem } from "../TableItem/";
-import Modal from "react-modal";
 import { useState } from "react";
+
 type Props = {
   list: Item[];
   handleDelItem: Function;
@@ -10,19 +10,16 @@ type Props = {
 };
 
 export const TableArea = ({ list, handleDelItem, handleEditItem }: Props) => {
-
   return (
     <C.Table>
-      <thead>
-        <tr>
-          <C.TableHeadColumn width={130}>Data</C.TableHeadColumn>
-          <C.TableHeadColumn width={130}>Categoria</C.TableHeadColumn>
+      <C.TableHead>
+          <C.TableHeadColumn>Data</C.TableHeadColumn>
+          <C.TableHeadColumn>Categoria</C.TableHeadColumn>
           <C.TableHeadColumn>Título</C.TableHeadColumn>
-          <C.TableHeadColumn width={150}>Valor</C.TableHeadColumn>
-          <C.TableHeadColumn width={200}>...</C.TableHeadColumn>
-        </tr>
-      </thead>
-      <tbody>
+          <C.TableHeadColumn>Valor</C.TableHeadColumn>
+          <C.TableHeadColumn width={50}>...</C.TableHeadColumn>
+      </C.TableHead>
+      <C.TableBody>
         {list.map((item, index) => (
           <TableItem
             key={index}
@@ -35,7 +32,7 @@ export const TableArea = ({ list, handleDelItem, handleEditItem }: Props) => {
             }}
           />
         ))}
-      </tbody>
+      </C.TableBody>
     </C.Table>
   );
 };

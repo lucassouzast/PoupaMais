@@ -3,6 +3,13 @@ import { Item } from "../../types/Item";
 import { formatDate } from "../../helpers/dateFilters";
 import { categories } from "../../data/categories";
 
+function formatDayMonth(date: Date) {
+  const d = typeof date === "string" ? new Date(date) : date;
+  return d.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+  });
+}
 
 type Props = {
   item: Item;
@@ -12,17 +19,15 @@ type Props = {
 };
 
 export const TableItem = ({ item, updateFunction, deleteFunction }: Props) => {
-
-
   return (
     <C.TableLine>
-      <C.TableColumn>{formatDate(item.date)}</C.TableColumn>
+      <C.DateColumn>{formatDayMonth(item.date)}</C.DateColumn>
       <C.TableColumn>
         <C.Category color={categories[item.category].color}>
           {categories[item.category].title}
         </C.Category>
       </C.TableColumn>
-      <C.TableColumn>{item.title}</C.TableColumn>
+      <C.TitleColumn>{item.title}</C.TitleColumn>
 
       <C.TableColumn>
         <C.Value color={categories[item.category].expense ? "red" : "green"}>
