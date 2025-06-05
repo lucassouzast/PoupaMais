@@ -72,8 +72,7 @@ export const TableHeadColumn = styled.th`
     &#valor {
       width: 30%;
     }
-
-
+  }
 `;
 
 export const TableBody = styled.tbody`
@@ -87,5 +86,42 @@ export const TableBody = styled.tbody`
       padding: 8px 4px;
       width: 100px;
     }
+  }
+`;
+
+export const TableRow = styled.tr`
+  transition: background 0.2s;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+`;
+
+export const TableColumn = styled.td`
+  padding: 12px 8px;
+  text-align: left;
+  font-size: 16px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  background: #fafdff;
+  border-bottom: 1px solid #eaeaea;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  /* Faz o texto ocupar mais espaço */
+  width: 100%;
+
+  /* Emoji opcional pode ser adicionado via ::before */
+  &.with-emoji::before {
+    content: "💡";
+    margin-right: 6px;
+    font-size: 18px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 13px;
+    padding: 10px 4px;
+    width: 100%;
+    gap: 6px;
   }
 `;
