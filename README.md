@@ -1,4 +1,4 @@
-# 💰 Dev Finance
+# 💰 Poupa+
 
 Aplicação web de controle financeiro pessoal, desenvolvida com React e TypeScript. Com uma interface moderna e funcional, permite registrar entradas e saídas, calcular saldos automaticamente e visualizar os dados por mês.
 
@@ -26,7 +26,7 @@ O **Dev Finance** é um gerenciador financeiro pessoal simples e eficiente. Idea
 - React  
 - TypeScript  
 - Vite  
-- Tailwind CSS
+- Styled-Components
 - CSS Modules  
 
 ---
