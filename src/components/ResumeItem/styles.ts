@@ -22,9 +22,8 @@ export const Info = styled.div<{ color?: string }>`
   font-weight: bold;
   color: ${(props) => props.color ?? "#000"};
   font-size: 20px;
-  word-break: break-all; // Permite quebra de números grandes
-  overflow-wrap: anywhere; // Garante quebra em qualquer ponto se necessário
-
+  word-break: break-all; 
+  overflow-wrap: anywhere; 
   @media (max-width: 600px) {
     font-size: 12px;
     word-break: break-all;
