@@ -12,7 +12,7 @@ type Props = {
 
 let objectTitles: string[] = Object.keys(categories);
 
-export const InputArea = ({ onAdd, item, onDelete }: Props) => {
+export const InputArea = ({ onAdd, item = null, onDelete }: Props) => {
   const [dateField, setDateField] = useState(
     item ? item.date.toISOString().split("T")[0] : ""
   );
@@ -61,7 +61,7 @@ export const InputArea = ({ onAdd, item, onDelete }: Props) => {
   };
 
   return (
-    <C.Container>
+    <C.Container update={item !== null}>
       <C.Label htmlFor="inputDate">
         Data:
         <C.Input
@@ -108,19 +108,31 @@ export const InputArea = ({ onAdd, item, onDelete }: Props) => {
           onChange={(e) => setValueField(e.target.value)}
         />
       </C.Label>
-
-      <C.Label>
-        <br />
-        <C.Button type="button" onClick={inputValidation}>
-          {item ? "Atualizar" : "Adicionar"}
-        </C.Button>
-        <br />
-        {item && ( 
-          <C.Button type="button" onClick={() => {onDelete && onDelete(item._id || "")}} variant={"danger"}>  
+      {item === null && (
+        <C.Label >
+          <C.Button type="button" onClick={inputValidation}>
+            {item ? "Atualizar" : "Adicionar"}
+          </C.Button>
+        </C.Label>
+      )}
+      {item !== null && (
+        <C.Label>
+          <C.Label update={item !== null}>
+            <C.Button type="button" onClick={inputValidation}>
+              {item ? "Atualizar" : "Adicionar"}
+            </C.Button>
+            <C.Button
+              type="button"
+              onClick={() => {
+                onDelete && onDelete(item._id || "");
+            }}
+            variant={"danger"}
+          >
             Remover
           </C.Button>
-        )}
+        </C.Label>
       </C.Label>
+      )}
     </C.Container>
   );
 };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.div<{ update?: boolean }>`
   background-color: #fff;
   box-shadow: 0px 0px 5px #ccc;
   border-radius: 10px;
@@ -19,15 +19,32 @@ export const Container = styled.div`
     gap: 8px;
     font-size: 13px;
   }
+  ${({ update }) =>
+    update &&
+    ` 
+      display: flex;
+      flex-direction: row;
+      margin-top: 50px;
+    `}
 `;
 
-export const Label = styled.label`
+export const Label = styled.label<{ update?: boolean }>`
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 4px;
   font-size: 15px;
   color: #333;
   font-weight: 500;
+
+  ${({ update }) =>
+    update &&
+    ` 
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 16px;
+    max-height: 150px;
+    `}
 `;
 
 export const Input = styled.input`
@@ -88,20 +105,17 @@ export const Select = styled.select`
 `;
 
 export const Button = styled.button<{ variant?: "primary" | "danger" }>`
-  padding: 0.3rem 1rem;
+  height: 40px;
+  padding: 0.5rem 0.8rem;
+  margin-top: rem;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 17px;
-  text-align: center;
-  text-decoration: none;
   color: #fff;
-  border: none;
   border-radius: 1rem;
   cursor: pointer;
   background-color: ${({ variant }) =>
     variant === "danger" ? "#e74c3c" : "#007bff"};
-  position: relative;
-  bottom: 6px;
   transition: background 0.2s, color 0.2s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 
