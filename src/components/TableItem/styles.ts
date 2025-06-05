@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-import { MdMoreVert } from 'react-icons/md';
-
-
-
 export const TableLine = styled.tr`
-    border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  &:hover {
+    background-color: #f5f5f5;
+  }
 `;
 
 export const TableColumn = styled.td`
@@ -16,35 +15,35 @@ export const TableColumn = styled.td`
   vertical-align: middle;
 
   @media (max-width: 600px) {
-    padding: 8px 4px;
     font-size: 13px;
   }
 `;
 
-export const ActionsColumn = styled.td`
-  padding: 12px 8px;
-  min-width: 60px;
-  max-width: 90px;
-  text-align: center;
+export const DateColumn = styled.td`
+  max-width: 60px;
+  min-width: 50px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
 
   @media (max-width: 600px) {
-    padding: 8px 4px;
-    min-width: 50px;
-    max-width: 70px;
+    text-align: center;
+    font-size: 13px;
+    max-width: 50px;
   }
 `;
 
-export const Category = styled.div<{ color: string }>`
+export const CategoryColumn = styled.div<{ color: string }>`
   display: inline-block;
   padding: 5px 10px;
   border-radius: 5px;
   color: #fff;
   background-color: ${(props) => props.color};
-  max-width: 100px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; //
 
   @media (max-width: 600px) {
     padding: 3px 3px;
@@ -58,12 +57,28 @@ export const Value = styled.div<{ color: string }>`
   font-weight: 600;
   max-width: 90px;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 
   @media (max-width: 600px) {
     font-size: 13px;
     max-width: 60px;
+  }
+`;
+
+export const TitleColumn = styled.td`
+  padding: 12px 8px;
+  max-width: 120px;
+  min-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+
+  @media (max-width: 600px) {
+    padding: 8px 2px 8px 2px;
+    font-size: 15px;
+    max-width: 40px;
+    min-width: 20px;
   }
 `;
 
@@ -83,40 +98,5 @@ export const IconButton = styled.button`
 
   &:active {
     background-color: #bbb;
-  }
-`;
-
-export const DateColumn = styled.td`
-  padding: 12px 8px;
-  max-width: 60px;
-  min-width: 50px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
-  font-variant-numeric: tabular-nums;
-
-  @media (max-width: 600px) {
-    padding: 8px 4px;
-    font-size: 13px;
-    max-width: 40px;
-    min-width: 36px;
-  }
-`;
-
-export const TitleColumn = styled.td`
-  padding: 12px 8px;
-  max-width: 120px;
-  min-width: 60px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: middle;
-
-  @media (max-width: 600px) {
-    padding: 8px 2px 8px 2px; 
-    font-size: 11px;          
-    max-width: 40px;          
-    min-width: 20px;          
   }
 `;

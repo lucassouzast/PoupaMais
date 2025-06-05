@@ -48,7 +48,6 @@ const App = () => {
 
   const handleMonthChange = (newMonth: string) => {
     setCurrentMonth(newMonth);
-    console.log(currentMonth);
   };
 
   const handleAddItem = () => {
@@ -62,6 +61,12 @@ const App = () => {
       getEntries();
     });
   };
+
+  const handleEditItem = (item: Item) => {
+  setIsOpen(true);
+  setItem(item);
+};
+
 
   const getEntries = () => {
     getAllEntries().then((res) => {
@@ -100,12 +105,10 @@ const App = () => {
           handleDelItem={(id: string) => {
             console.log(id);
           }}
-          handleEditItem={(item: Item) => {
-            setIsOpen(true);
-            setItem(item);
-          }}
+          handleEditItem={handleEditItem}
         />
       </C.Body>
+
       <Modal
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}

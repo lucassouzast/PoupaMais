@@ -14,11 +14,11 @@ export const TableArea = ({ list, handleDelItem, handleEditItem }: Props) => {
     <C.TableWrapper>
       <C.Table>
         <C.TableHead>
-          <C.TableHeadColumn>Data</C.TableHeadColumn>
-          <C.TableHeadColumn>Categoria</C.TableHeadColumn>
-          <C.TableHeadColumn>Título</C.TableHeadColumn>
-          <C.TableHeadColumn>Valor</C.TableHeadColumn>
-          <C.TableHeadColumn>...</C.TableHeadColumn>
+          <C.TableHeadColumn id="data">Data</C.TableHeadColumn>
+          <C.TableHeadColumn id="categoria">Categoria</C.TableHeadColumn>
+          <C.TableHeadColumn id="titulo">Título</C.TableHeadColumn>
+          <C.TableHeadColumn id="valor">Valor</C.TableHeadColumn>
+          <C.TableHeadColumn style={{ width: "10%" }}></C.TableHeadColumn>
         </C.TableHead>
         <C.TableBody>
           {list.map((item, index) => (

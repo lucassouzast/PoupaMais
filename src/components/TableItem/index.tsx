@@ -14,18 +14,17 @@ function formatDayMonth(date: Date) {
 type Props = {
   item: Item;
   updateFunction: (item: Item) => void;
-
   deleteFunction: (id: string) => void;
 };
 
-export const TableItem = ({ item, updateFunction, deleteFunction }: Props) => {
+export const TableItem = ({ item, updateFunction }: Props) => {
   return (
     <C.TableLine>
       <C.DateColumn>{formatDayMonth(item.date)}</C.DateColumn>
       <C.TableColumn>
-        <C.Category color={categories[item.category].color}>
+        <C.CategoryColumn color={categories[item.category].color}>
           {categories[item.category].title}
-        </C.Category>
+        </C.CategoryColumn>
       </C.TableColumn>
       <C.TitleColumn>{item.title}</C.TitleColumn>
 
@@ -38,7 +37,13 @@ export const TableItem = ({ item, updateFunction, deleteFunction }: Props) => {
         </C.Value>
       </C.TableColumn>
       <C.TableColumn>
-        <C.IconButton onClick={() => updateFunction(item)}>⋮</C.IconButton>
+        <C.IconButton
+          onClick={() => {
+            updateFunction(item);
+          }}
+        >
+          ⋮
+        </C.IconButton>
       </C.TableColumn>
     </C.TableLine>
   );
