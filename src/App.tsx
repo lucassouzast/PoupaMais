@@ -9,7 +9,7 @@ import { InfoArea } from "./components/InfoArea";
 import { InputArea } from "./components/InputArea";
 
 import "./App.css";
-import { getAllEntries } from "./services/entries.services";
+import { deleteEntry, getAllEntries } from "./services/entries.services";
 import Modal from "./components/Modal";
 
 const App = () => {
@@ -57,6 +57,12 @@ const App = () => {
     setItem(null);
   };
 
+  const handleDelItem = (id: string) => {
+    deleteEntry(id).then((res) => {
+      getEntries();
+    });
+  };
+
   const getEntries = () => {
     getAllEntries().then((res) => {
       if (res?.data?.length) {
@@ -77,7 +83,7 @@ const App = () => {
   return (
     <C.Container>
       <C.Header>
-        <C.HeaderText>Sistema Financeiro</C.HeaderText>
+        <C.HeaderText>Controle de Finanças</C.HeaderText>
       </C.Header>
       <C.Body>
         <InfoArea
@@ -88,6 +94,7 @@ const App = () => {
         />
 
         <InputArea onAdd={handleAddItem} />
+
         <TableArea
           list={filteredList}
           handleDelItem={(id: string) => {
@@ -105,8 +112,19 @@ const App = () => {
         title="Editar Item"
       >
         <div>
-          <InputArea item={item} onAdd={handleAddItem} />
+          <InputArea item={item} onAdd={handleAddItem} onDelete={
+            (id) => {
+              if (id) {
+                handleDelItem(id);
+              } else {
+                console.log("No item to delete");
+              }
+              setIsOpen(false);
+              setItem(null);
+            }
+          } />
         </div>
+
       </Modal>
     </C.Container>
   );

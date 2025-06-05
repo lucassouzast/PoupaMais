@@ -38,10 +38,7 @@ export const TableItem = ({ item, updateFunction, deleteFunction }: Props) => {
         </C.Value>
       </C.TableColumn>
       <C.TableColumn>
-        <C.IconButton onClick={() => updateFunction(item)}>✏️</C.IconButton>
-        <C.IconButton onClick={() => deleteFunction(item?._id || "")}>
-          🗑️
-        </C.IconButton>
+        <C.IconButton onClick={() => updateFunction(item)}>⋮</C.IconButton>
       </C.TableColumn>
     </C.TableLine>
   );

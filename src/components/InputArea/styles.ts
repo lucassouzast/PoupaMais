@@ -82,32 +82,33 @@ export const Select = styled.select`
     }
 `;
 
-export const Button = styled.button`
-    padding: 0.3rem 1rem;
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-size: 17px;
-    text-align: center;
-    text-decoration: none;
+export const Button = styled.button<{ variant?: "primary" | "danger" }>`
+  padding: 0.3rem 1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: ${({ variant }) => (variant === "danger" ? "#e74c3c" : "#007bff")};
+  position: relative;
+  bottom: 6px;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+
+  &:hover {
+    background-color: ${({ variant }) => (variant === "danger" ? "#c0392b" : "#0056b3")};
     color: #fff;
-    border: none;
-    border-radius: 1rem;
-    cursor: pointer;
-    background-color: #007bff;
-    position: relative;
-    bottom: 6px;
-    transition: background 0.2s, color 0.2s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
 
-    &:hover {
-        background-color: #0056b3;
-        color: #fff;
-    }
-
-    @media (max-width: 600px) {
-        font-size: 15px;
-        width: 100%;
-        bottom: 0;
-        padding: 0.5rem 0;
-    }
+  @media (max-width: 600px) {
+    font-size: 15px;
+    width: 100%;
+    bottom: 0;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+  }
 `;

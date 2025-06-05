@@ -6,12 +6,13 @@ import { createEntry, updateEntry } from "../../services/entries.services";
 
 type Props = {
   onAdd: () => void;
+  onDelete?: (id?: string) => void;
   item?: Item | null;
 };
 
 let objectTitles: string[] = Object.keys(categories);
 
-export const InputArea = ({ onAdd, item }: Props) => {
+export const InputArea = ({ onAdd, item, onDelete }: Props) => {
   const [dateField, setDateField] = useState(
     item ? item.date.toISOString().split("T")[0] : ""
   );
@@ -113,6 +114,12 @@ export const InputArea = ({ onAdd, item }: Props) => {
         <C.Button type="button" onClick={inputValidation}>
           {item ? "Atualizar" : "Adicionar"}
         </C.Button>
+        <br />
+        {item && ( 
+          <C.Button type="button" onClick={() => {onDelete && onDelete(item._id || "")}} variant={"danger"}>  
+            Remover
+          </C.Button>
+        )}
       </C.Label>
     </C.Container>
   );

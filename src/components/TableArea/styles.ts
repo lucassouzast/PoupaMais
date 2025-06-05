@@ -21,8 +21,11 @@ export const Table = styled.table`
   table-layout: auto;
 
   @media (max-width: 600px) {
-    font-size: 3px;
-    min-width: 500px;
+    min-width: unset;      
+    width: 100%; 
+    table-layout: fixed;   
+    font-size: 13px;       
+    max-width: 100vw;      
   }
 `;
 

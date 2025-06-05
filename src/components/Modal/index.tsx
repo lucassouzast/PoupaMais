@@ -17,7 +17,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
         <S.Header>
           {title && <S.Title>{title}</S.Title>}
           <S.CloseButton onClick={onClose} aria-label="Fechar modal">
-            &times;
+            &times; 
           </S.CloseButton>
         </S.Header>
         <S.Content>{children}</S.Content>
