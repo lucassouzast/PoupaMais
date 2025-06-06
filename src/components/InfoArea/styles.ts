@@ -8,12 +8,24 @@ export const Container = styled.div`
   margin-top: 10px;
   display: flex;
   align-items: center;
+  flex-direction: row;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 `;
 
 export const MonthArea = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
+
+  @media (max-width: 600px) {
+    margin-bottom: 16px;
+    justify-content: center;
+  }
 `;
 export const MonthArrow = styled.div`
   width: 40px;
@@ -38,11 +50,11 @@ export const MonthTitle = styled.div`
 export const ResumeArea = styled.div`
   flex: 2;
   display: flex;
+  gap: 16px;
+
   @media (max-width: 600px) {
-    flex-direction: row;
-    align-items: center;
-    font-size: 14px;
+    flex-direction: row; 
+    gap: 8px;
   }
 `;
-
 

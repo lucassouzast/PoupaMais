@@ -27,7 +27,6 @@ export const TableItem = ({ item, updateFunction }: Props) => {
         </C.CategoryColumn>
       </C.TableColumn>
       <C.TitleColumn>{item.title}</C.TitleColumn>
-
       <C.TableColumn>
         <C.Value color={categories[item.category].expense ? "red" : "green"}>
           {new Intl.NumberFormat("pt-BR", {

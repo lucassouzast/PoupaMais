@@ -61,78 +61,79 @@ export const InputArea = ({ onAdd, item = null, onDelete }: Props) => {
   };
 
   return (
-    <C.Container update={item !== null}>
-      <C.Label htmlFor="inputDate">
-        Data:
-        <C.Input
-          type="date"
-          id="inputDate"
-          value={dateField}
-          onChange={(e) => setDateField(e.target.value)}
-        />
-      </C.Label>
-
-      <C.Label htmlFor="select">
-        Categoria:
-        <C.Select
-          id="select"
-          required
-          value={categoryField}
-          onChange={(e) => setCategoryField(e.target.value)}
-        >
-          <option value={""} disabled></option>
-          {objectTitles.map((key, index) => (
-            <option value={key} key={index}>
-              {categories[key].title}
-            </option>
-          ))}
-        </C.Select>
-      </C.Label>
-
-      <C.Label htmlFor="title">
-        Título:
-        <C.Input
-          type="text"
-          id="title"
-          value={titleField}
-          onChange={(e) => setTitleField(e.target.value)}
-        />
-      </C.Label>
-
-      <C.Label htmlFor="value">
-        Valor:
-        <C.Input
-          type="number"
-          id="value"
-          value={valueField}
-          onChange={(e) => setValueField(e.target.value)}
-        />
-      </C.Label>
-      {item === null && (
-        <C.Label >
-          <C.Button type="button" onClick={inputValidation}>
-            {item ? "Atualizar" : "Adicionar"}
-          </C.Button>
+    <>
+      <C.Container update={item !== null}>
+        <C.Label htmlFor="inputDate">
+          Data:
+          <C.Input
+            type="date"
+            id="inputDate"
+            value={dateField}
+            onChange={(e) => setDateField(e.target.value)}
+          />
         </C.Label>
-      )}
-      {item !== null && (
-        <C.Label>
-          <C.Label update={item !== null}>
+
+        <C.Label htmlFor="select">
+          Categoria:
+          <C.Select
+            id="select"
+            required
+            value={categoryField}
+            onChange={(e) => setCategoryField(e.target.value)}
+          >
+            <option value={""} disabled></option>
+            {objectTitles.map((key, index) => (
+              <option value={key} key={index}>
+                {categories[key].title}
+              </option>
+            ))}
+          </C.Select>
+        </C.Label>
+
+        <C.Label htmlFor="title">
+          Título:
+          <C.Input
+            type="text"
+            id="title"
+            value={titleField}
+            onChange={(e) => setTitleField(e.target.value)}
+          />
+        </C.Label>
+
+        <C.Label htmlFor="value">
+          Valor:
+          <C.Input
+            type="number"
+            id="value"
+            value={valueField}
+            onChange={(e) => setValueField(e.target.value)}
+          />
+        </C.Label>
+        {item === null && (
+          <C.ButtonLabel>
             <C.Button type="button" onClick={inputValidation}>
-              {item ? "Atualizar" : "Adicionar"}
+              Adicionar
             </C.Button>
+          </C.ButtonLabel>
+        )}
+      </C.Container>
+
+      {item !== null && (
+        <C.RowLabels>
             <C.Button
               type="button"
               onClick={() => {
                 onDelete && onDelete(item._id || "");
-            }}
-            variant={"danger"}
-          >
-            Remover
-          </C.Button>
-        </C.Label>
-      </C.Label>
+              }}
+              variant={"danger"}
+            >
+              Remover
+            </C.Button>
+            <C.Button type="button" onClick={inputValidation}>
+              Atualizar
+            </C.Button>
+        </C.RowLabels>
       )}
-    </C.Container>
+    </>
   );
 };

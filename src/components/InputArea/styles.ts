@@ -28,6 +28,38 @@ export const Container = styled.div<{ update?: boolean }>`
     `}
 `;
 
+export const RowLabels = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  gap: 16px;
+
+  @media (max-width: 600px) {
+    margin-top: 15px;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+`;
+
+export const ButtonLabel = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
 export const Label = styled.label<{ update?: boolean }>`
   display: flex;
   flex: 1;
@@ -107,7 +139,8 @@ export const Select = styled.select`
 export const Button = styled.button<{ variant?: "primary" | "danger" }>`
   height: 40px;
   padding: 0.5rem 0.8rem;
-  margin-top: rem;
+  margin-top: 1.5rem;
+  max-width: 150px;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   font-size: 17px;

@@ -39,4 +39,3 @@ export const InfoArea = ( {currentMonth, onMonthChange, income, expense}: Props)
     )
 }
 
-

@@ -45,7 +45,6 @@ export const TableHeadColumn = styled.th`
   &#data {
     max-width: 80px;
     width: 15%;
-    text-align: left;
     padding-left: 10px;
   }
   &#categoria {
@@ -108,10 +107,8 @@ export const TableColumn = styled.td`
   align-items: center;
   gap: 8px;
 
-  /* Faz o texto ocupar mais espaço */
   width: 100%;
 
-  /* Emoji opcional pode ser adicionado via ::before */
   &.with-emoji::before {
     content: "💡";
     margin-right: 6px;

@@ -20,13 +20,10 @@ export const TableColumn = styled.td`
 `;
 
 export const DateColumn = styled.td`
-  max-width: 60px;
   min-width: 50px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: left;
-  font-variant-numeric: tabular-nums;
+  padding-left: 10px;
+  font-weight: 600;
 
   @media (max-width: 600px) {
     text-align: center;
