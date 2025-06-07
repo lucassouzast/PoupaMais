@@ -6,7 +6,7 @@ export const getCurrentMonth = () => {
     return `${now.getFullYear()}-${now.getMonth()+1}`
 }
 
-export const filterListByMonth = (list: Item[], date: string): Item[] => {
+export const filterListByMonth = (list: Item[], date: string, order: boolean = false): Item[] => {
     let newList: Item[] = [];
     let [year, month] = date.split('-');
 
@@ -20,7 +20,7 @@ export const filterListByMonth = (list: Item[], date: string): Item[] => {
     }
 
     // Ordenar por data (mais antigo primeiro)
-    newList.sort((a, b) => b.date.getTime() - a.date.getTime());
+    newList.sort((a, b) => order ? a.date.getTime() - b.date.getTime() : b.date.getTime() - a.date.getTime());
 
     return newList;
 };

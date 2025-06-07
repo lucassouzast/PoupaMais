@@ -13,6 +13,7 @@ import { deleteEntry, getAllEntries } from "./services/entries.services";
 import Modal from "./components/Modal";
 
 const App = () => {
+  const [ orderByDate, setOrderByDate ] = useState(false);
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
@@ -20,7 +21,6 @@ const App = () => {
   const [expense, setExpense] = useState(0);
 
   const [item, setItem] = useState<Item | null>(null);
-
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -28,8 +28,8 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    setFilteredList(filterListByMonth(list, currentMonth));
-  }, [list, currentMonth]);
+    setFilteredList(filterListByMonth(list, currentMonth, orderByDate));
+  }, [list, currentMonth, orderByDate]);
 
   useEffect(() => {
     let incomeCount = 0;
@@ -101,6 +101,7 @@ const App = () => {
         <InputArea onAdd={handleAddItem} />
 
         <TableArea
+          functionSetDateOrder={() => { setOrderByDate(!orderByDate) }}
           list={filteredList}
           handleDelItem={(id: string) => {
             console.log(id);

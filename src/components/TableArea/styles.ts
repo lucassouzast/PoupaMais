@@ -35,12 +35,12 @@ export const TableHead = styled.thead`
 `;
 
 export const TableHeadColumn = styled.th`
-  padding: 4px 2px;
+  padding: 20px 10px;
   text-align: left;
-  white-space: normal;
   overflow: visible;
   text-overflow: initial;
   width: 25%;
+
 
   &#data {
     max-width: 80px;
@@ -55,6 +55,12 @@ export const TableHeadColumn = styled.th`
   }
   &#valor {
     width: 25%;
+  }
+
+  div {
+    display:flex;
+    width: 60%;
+    justify-content: space-between;
   }
 
   @media (max-width: 600px) {

@@ -7,9 +7,10 @@ type Props = {
   list: Item[];
   handleDelItem: Function;
   handleEditItem: Function;
+  functionSetDateOrder: Function;
 };
 
-export const TableArea = ({ list, handleDelItem, handleEditItem }: Props) => {
+export const TableArea = ({ list, handleDelItem, handleEditItem, functionSetDateOrder }: Props) => {
   return (
     <C.TableWrapper>
       <C.Table>
@@ -22,7 +23,7 @@ export const TableArea = ({ list, handleDelItem, handleEditItem }: Props) => {
         ) : (
           <>
             <C.TableHead>
-              <C.TableHeadColumn id="data">Data</C.TableHeadColumn>
+              <C.TableHeadColumn id="data" onClick={() => functionSetDateOrder()} style={{ cursor: "pointer" }}><div>Data<span>🔃</span></div></C.TableHeadColumn>
               <C.TableHeadColumn id="categoria">Categoria</C.TableHeadColumn>
               <C.TableHeadColumn id="titulo">Título</C.TableHeadColumn>
               <C.TableHeadColumn id="valor">Valor</C.TableHeadColumn>
