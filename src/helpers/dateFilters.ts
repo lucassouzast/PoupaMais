@@ -20,7 +20,7 @@ export const filterListByMonth = (list: Item[], date: string): Item[] => {
     }
 
     // Ordenar por data (mais antigo primeiro)
-    newList.sort((a, b) => a.date.getTime() - b.date.getTime());
+    newList.sort((a, b) => b.date.getTime() - a.date.getTime());
 
     return newList;
 };
