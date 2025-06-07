@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import * as C from "./App.styles";
 import { Item } from "./types/Item";
 import { categories } from "./data/categories";
-import { items } from "./data/items";
 import { filterListByMonth, getCurrentMonth } from "./helpers/dateFilters";
 import { TableArea } from "./components/TableArea";
 import { InfoArea } from "./components/InfoArea";
