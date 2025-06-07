@@ -12,7 +12,7 @@ import { deleteEntry, getAllEntries } from "./services/entries.services";
 import Modal from "./components/Modal";
 
 const App = () => {
-  const [ orderByDate, setOrderByDate ] = useState(false);
+  const [orderByDate, setOrderByDate] = useState(false);
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
@@ -62,10 +62,9 @@ const App = () => {
   };
 
   const handleEditItem = (item: Item) => {
-  setIsOpen(true);
-  setItem(item);
-};
-
+    setIsOpen(true);
+    setItem(item);
+  };
 
   const getEntries = () => {
     getAllEntries().then((res) => {
@@ -100,7 +99,9 @@ const App = () => {
         <InputArea onAdd={handleAddItem} />
 
         <TableArea
-          functionSetDateOrder={() => { setOrderByDate(!orderByDate) }}
+          functionSetDateOrder={() => {
+            setOrderByDate(!orderByDate);
+          }}
           list={filteredList}
           handleDelItem={(id: string) => {
             console.log(id);
@@ -115,8 +116,10 @@ const App = () => {
         title="Editar Item"
       >
         <div>
-          <InputArea item={item} onAdd={handleAddItem} onDelete={
-            (id) => {
+          <InputArea
+            item={item}
+            onAdd={handleAddItem}
+            onDelete={(id) => {
               if (id) {
                 handleDelItem(id);
               } else {
@@ -124,10 +127,9 @@ const App = () => {
               }
               setIsOpen(false);
               setItem(null);
-            }
-          } />
+            }}
+          />
         </div>
-
       </Modal>
     </C.Container>
   );

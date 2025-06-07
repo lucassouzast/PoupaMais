@@ -22,17 +22,17 @@ export const TableItem = ({ item, updateFunction }: Props) => {
     <C.TableLine>
       <C.DateColumn>{formatDayMonth(item.date)}</C.DateColumn>
       <C.TableColumn>
-        <C.CategoryColumn color={categories[item.category].color}>
-          {categories[item.category].title}
+        <C.CategoryColumn color={categories[item.category]?.color || "gray"}>
+          {categories[item.category]?.title || "Categoria Desconhecida"}
         </C.CategoryColumn>
       </C.TableColumn>
       <C.TitleColumn>{item.title}</C.TitleColumn>
       <C.TableColumn>
-        <C.Value color={categories[item.category].expense ? "red" : "green"}>
+        <C.Value color={categories[item.category]?.expense ? "red" : "green"}>
           {new Intl.NumberFormat("pt-BR", {
             style: "currency",
             currency: "BRL",
-          }).format(item.value)}
+          }).format(item?.value || 0)}
         </C.Value>
       </C.TableColumn>
       <C.TableColumn>
