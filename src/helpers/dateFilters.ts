@@ -14,13 +14,17 @@ export const filterListByMonth = (list: Item[], date: string): Item[] => {
         if (
             list[i].date.getFullYear() === parseInt(year) &&
             (list[i].date.getMonth() + 1) === parseInt(month)
-        ){
+        ) {
             newList.push(list[i]);
         }
     }
 
+    // Ordenar por data (mais antigo primeiro)
+    newList.sort((a, b) => a.date.getTime() - b.date.getTime());
+
     return newList;
-}
+};
+
 
 export const formatDate = (date: Date) : string => {
     let year = date.getFullYear();
