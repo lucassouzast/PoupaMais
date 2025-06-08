@@ -20,6 +20,8 @@ export const Header = styled.div`
     background-color: darkblue;
     height: 100%;
     text-align: center;
+    justify-content: center;
+    display: flex;
 
     @media (max-width: 600px) {
         height: 100px;
@@ -28,12 +30,12 @@ export const Header = styled.div`
 `;
 
 export const HeaderText = styled.h1`
-    margin: 10px 10px;
     font-size: 2.5rem;
     font-weight: 600;
     padding: 10px 0;
     padding-top: 30px;
     color: #fff;
+    margin:auto;
 
     @media (max-width: 600px) {
         font-size: 1.5rem;
