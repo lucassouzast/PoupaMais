@@ -6,7 +6,7 @@ Aplicação web de controle financeiro pessoal, desenvolvida com React e TypeScr
 
 ## 🚀 Sobre o Projeto
 
-O **Dev Finance** é um gerenciador financeiro pessoal simples e eficiente. Ideal para quem deseja acompanhar seus gastos e receitas mensalmente, com uma navegação fluida e visual amigável.
+O **Poupa+** é um gerenciador financeiro pessoal simples e eficiente. Ideal para quem deseja acompanhar seus gastos e receitas mensalmente, com uma navegação fluida e visual amigável.
 
 > Esta é uma versão em desenvolvimento, com novas funcionalidades sendo planejadas e implementadas.
 
@@ -40,13 +40,14 @@ npm install
 npm run dev
 
 🌱 Próximas Funcionalidades
-💾 Salvamento de dados com banco de dados
 
-📱 Melhor responsividade
+💾 Salvamento de dados com banco de dados ✅
+
+📱 Melhor responsividade ✅
+
+🔒 Login e autenticação ✅
 
 🌙 Modo escuro
-
-🔒 Login e autenticação
 
 📄 Licença
 Este projeto está licenciado sob a MIT License.
