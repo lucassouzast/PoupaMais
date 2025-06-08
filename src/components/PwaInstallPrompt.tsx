@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-export const PwaPromptWrapper = styled.div`
+export const PwaPromptWrapper = styled.div<{ $show?: boolean }>`
   position: fixed;
   top: 32px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(${props => (props.$show ? "0" : "-32px")});
+  opacity: ${props => (props.$show ? 1 : 0)};
   max-width: 340px;
   background: #fffbe6;
   color: #2c6e49;
@@ -18,6 +19,7 @@ export const PwaPromptWrapper = styled.div`
   flex-direction: column;
   align-items: stretch;
   gap: 12px;
+  transition: opacity 0.4s, transform 0.4s;
 `;
 
 export const PwaPromptClose = styled.button`
