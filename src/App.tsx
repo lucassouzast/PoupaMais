@@ -8,10 +8,10 @@ import { Home } from "./screens/Home/Home";
 import { PwaPromptWrapper, PwaPromptButton, PwaPromptClose } from "./components/PwaInstallPrompt";
 
 function isIos() {
-  return (
-    /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase()) &&
-    !window.navigator.userAgent.toLowerCase().includes("crios")
-  );
+  const ua = window.navigator.userAgent.toLowerCase();
+  const isMobile = /iphone|ipad|ipod/.test(ua);
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  return isMobile && isTouch && !ua.includes("crios");
 }
 
 const App = () => {
@@ -19,8 +19,19 @@ const App = () => {
   const [showInstall, setShowInstall] = useState(false);
   const [showIosTip, setShowIosTip] = useState(false);
 
-  // Checa se o usuário já fechou o aviso
+  // Detecta se está rodando como app instalado (standalone)
+  const isStandalone =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    (window.navigator as any).standalone === true;
+
   useEffect(() => {
+    if (isStandalone) {
+      setShowInstall(false);
+      setShowIosTip(false);
+      return;
+    }
+
+    // Checa se o usuário já fechou o aviso
     const alreadyClosed = localStorage.getItem("pwaPromptClosed");
     if (alreadyClosed === "true") return;
 
@@ -36,7 +47,7 @@ const App = () => {
 
     // Para Android/Chrome: se o evento não disparar, mostra o aviso mesmo assim
     setTimeout(() => {
-      if (!window.matchMedia('(display-mode: standalone)').matches && !deferredPrompt && !isIos()) {
+      if (!isStandalone && !deferredPrompt && !isIos()) {
         setShowInstall(true);
       }
     }, 1000);
@@ -50,7 +61,7 @@ const App = () => {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then(() => {
         setShowInstall(false);
-        localStorage.setItem("pwaPromptClosed", "true");
+        localStorage.setItem("pwaPromptClosed", "true"); // Só salva se adicionou
       });
     }
   };
@@ -58,7 +69,7 @@ const App = () => {
   const handleClose = () => {
     setShowInstall(false);
     setShowIosTip(false);
-    localStorage.setItem("pwaPromptClosed", "true");
+    // Não salva nada no localStorage aqui!
   };
 
   return (
