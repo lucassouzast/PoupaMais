@@ -71,8 +71,8 @@ export const LogoutButton = styled.button`
   position: absolute;
   top: 24px;
   right: 32px;
-  background: #fff;         // Fundo branco só no botão
-  color: #111;              // Texto preto
+  background: #fff; // Fundo branco só no botão
+  color: #111; // Texto preto
   border: 1.5px solid #2c6e49;
   border-radius: 8px;
   padding: 10px 22px 10px 16px;
@@ -102,5 +102,13 @@ export const LogoutButton = styled.button`
 
   &:hover svg {
     fill: #3aafa9;
+  }
+
+  @media (max-width: 600px) {
+    top: -10px;
+    right: 8px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    text-align: center;
   }
 `;

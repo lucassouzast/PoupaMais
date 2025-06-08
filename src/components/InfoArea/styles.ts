@@ -13,6 +13,7 @@ export const Container = styled.div`
   @media (max-width: 600px) {
     flex-direction: column;
     align-items: stretch;
+    width: 90%
   }
 `;
 

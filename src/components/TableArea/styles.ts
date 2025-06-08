@@ -9,6 +9,7 @@ export const TableWrapper = styled.div`
   margin-top: 20px;
   @media (max-width: 600px) {
     margin-top: 10px;
+    width: 90%
   }
 `;
 
@@ -20,11 +21,13 @@ export const Table = styled.table`
   table-layout: fixed;
 
   @media (max-width: 600px) {
-    min-width: unset;
     width: 100%;
     table-layout: fixed;
     font-size: 13px;
     max-width: 100vw;
+  overflow-x: auto;
+
+
   }
 `;
 
@@ -69,13 +72,13 @@ export const TableHeadColumn = styled.th`
       width: 15%;
     }
     &#categoria {
-      width: 25%;
+      width: 15%;
     }
     &#titulo {
-      width: 20%;
+      width: 15%;
     }
     &#valor {
-      width: 30%;
+      width: 20%;
     }
   }
 `;

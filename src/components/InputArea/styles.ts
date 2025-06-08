@@ -11,6 +11,7 @@ export const Container = styled.div<{ update?: boolean }>`
   font-size: 15px;
   font-weight: 600;
   gap: 10px;
+  
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -18,6 +19,9 @@ export const Container = styled.div<{ update?: boolean }>`
     padding: 10px;
     gap: 8px;
     font-size: 13px;
+    width: 90%
+
+
   }
   ${({ update }) =>
     update &&
@@ -57,6 +61,7 @@ export const ButtonLabel = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    
   }
 `;
 
