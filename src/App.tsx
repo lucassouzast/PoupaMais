@@ -19,18 +19,11 @@ const App = () => {
   const [showInstall, setShowInstall] = useState(false);
   const [showIosTip, setShowIosTip] = useState(false);
 
+  // Checa se o usuário já fechou o aviso
   useEffect(() => {
-    let timer: number;
-    if (showInstall || showIosTip) {
-      timer = window.setTimeout(() => {
-        setShowInstall(false);
-        setShowIosTip(false);
-      }, 7000);
-    }
-    return () => clearTimeout(timer);
-  }, [showInstall, showIosTip]);
+    const alreadyClosed = localStorage.getItem("pwaPromptClosed");
+    if (alreadyClosed === "true") return;
 
-  useEffect(() => {
     if (isIos()) {
       setShowIosTip(true);
     }
@@ -41,7 +34,15 @@ const App = () => {
     };
     window.addEventListener("beforeinstallprompt", handler);
 
+    // Para Android/Chrome: se o evento não disparar, mostra o aviso mesmo assim
+    setTimeout(() => {
+      if (!window.matchMedia('(display-mode: standalone)').matches && !deferredPrompt && !isIos()) {
+        setShowInstall(true);
+      }
+    }, 1000);
+
     return () => window.removeEventListener("beforeinstallprompt", handler);
+    // eslint-disable-next-line
   }, []);
 
   const handleInstallClick = () => {
@@ -49,8 +50,15 @@ const App = () => {
       deferredPrompt.prompt();
       deferredPrompt.userChoice.then(() => {
         setShowInstall(false);
+        localStorage.setItem("pwaPromptClosed", "true");
       });
     }
+  };
+
+  const handleClose = () => {
+    setShowInstall(false);
+    setShowIosTip(false);
+    localStorage.setItem("pwaPromptClosed", "true");
   };
 
   return (
@@ -71,26 +79,32 @@ const App = () => {
         </AuthProvider>
       </Router>
       {showInstall && (
-        <PwaPromptWrapper>
+        <PwaPromptWrapper $show={showInstall}>
           <span style={{ flex: 1 }}>
             Adicione o Poupa+ à tela inicial para acessar mais rápido!
           </span>
-          <PwaPromptButton onClick={handleInstallClick}>
-            Adicionar à tela inicial
-          </PwaPromptButton>
-          <PwaPromptClose onClick={() => setShowInstall(false)} title="Fechar">
+          {deferredPrompt ? (
+            <PwaPromptButton onClick={handleInstallClick}>
+              Adicionar à tela inicial
+            </PwaPromptButton>
+          ) : (
+            <span style={{ color: "#888", fontSize: "0.95em", marginTop: 8 }}>
+              Use o menu do navegador para adicionar à tela inicial.
+            </span>
+          )}
+          <PwaPromptClose onClick={handleClose} title="Fechar">
             ×
           </PwaPromptClose>
         </PwaPromptWrapper>
       )}
       {showIosTip && (
-        <PwaPromptWrapper>
+        <PwaPromptWrapper $show={showIosTip}>
           <span style={{ flex: 1 }}>
             Para instalar o Poupa+ no iPhone, toque no botão de compartilhar
             <span role="img" aria-label="compartilhar"> ⬆️ </span>
             e depois em <b>“Adicionar à Tela de Início”</b>.
           </span>
-          <PwaPromptClose onClick={() => setShowIosTip(false)} title="Fechar">
+          <PwaPromptClose onClick={handleClose} title="Fechar">
             ×
           </PwaPromptClose>
         </PwaPromptWrapper>
