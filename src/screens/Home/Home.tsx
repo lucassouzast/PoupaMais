@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import * as C from "../../App.styles";
+import { useContext, useState, useEffect } from "react";
+import * as C from "./styles";
+import { AuthContext } from "../../contexts/AuthContext"; // adicione este import
 import { Item } from "../../types/Item";
 import { categories } from "../../data/categories";
 import { filterListByMonth, getCurrentMonth } from "../../helpers/dateFilters";
@@ -13,6 +14,7 @@ import { deleteEntry, getAllEntries } from "../../services/entries.services";
 import Modal from "../../components/Modal";
 
 const Home = () => {
+  const { logout } = useContext(AuthContext); // adicione esta linha
   const [orderByDate, setOrderByDate] = useState(false);
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
@@ -87,11 +89,15 @@ const Home = () => {
   return (
     <C.Container>
       <C.Header>
-        <C.HeaderText>
-          <LogoPoupaMais />
-        </C.HeaderText>
+        <C.LogoutButton onClick={logout}>
+          Sair
+          <svg viewBox="0 0 24 24">
+            <path d="M16 17l1.41-1.41L13.83 12l3.58-3.59L16 7l-5 5 5 5zM19 3H5c-1.1 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+          </svg>
+        </C.LogoutButton>
       </C.Header>
       <C.Body>
+        <LogoPoupaMais color="#111" />
         <InfoArea
           currentMonth={currentMonth}
           onMonthChange={handleMonthChange}

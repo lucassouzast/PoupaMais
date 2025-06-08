@@ -1,6 +1,6 @@
 import React from "react";
 
-const LogoPoupaMais = () => (
+const LogoPoupaMais = ( {color = "#fff" }: {color: string}) => (
   <svg
     width="220"
     height="60"
@@ -45,13 +45,13 @@ const LogoPoupaMais = () => (
         strokeWidth="2"
       />
     </g>
-    <text
+    <text 
       x="50"
       y="40"
       fontFamily="'Montserrat', sans-serif"
       fontWeight="700"
       fontSize="36"
-      fill="#fff"
+      fill={color}
       letterSpacing="0.5"
     >
       Poupa

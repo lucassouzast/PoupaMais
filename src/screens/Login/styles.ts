@@ -24,6 +24,7 @@ export const LeftContainer = styled.div`
   z-index: 1;
   padding: 0;
   background: #f6fff8;
+  overflow: hidden; /* Garante que o pseudo-elemento não vaze */
 
   img {
     width: 100%;
@@ -31,8 +32,20 @@ export const LeftContainer = styled.div`
     object-fit: cover;
     filter: brightness(0.92) saturate(1.1);
     border-radius: 0;
-    box-shadow: -120px 0 160px -16px rgba(44, 110, 73, 0.45);
     transform: scaleX(-1);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Sombra interna suave para profundidade usando pseudo-elemento */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    box-shadow: inset 0 0 80px 32px rgba(30, 30, 30, 0.22);
+    border-radius: 0;
   }
 
   @media (max-width: 900px) {
