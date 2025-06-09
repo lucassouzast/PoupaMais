@@ -1,8 +1,8 @@
 // src/pages/Login.tsx
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { LoginService, RegisterService } from "../../services/auth.services";
+import { getApi, LoginService, RegisterService } from "../../services/auth.services";
 import * as C from "./styles";
 import LogoPoupaMais from "../../assets/LogoPoupaMais";
 import economiaImg from "../../assets/economia.jpg";
@@ -21,7 +21,14 @@ export const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(()=> {
+    getApi().then((res) => {
+      console.log(res);
+    });
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
+
     e.preventDefault();
 
     if (isRegister) {

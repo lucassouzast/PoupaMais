@@ -6,6 +6,15 @@ type User = {
   name?: string;
 };
 
+export const getApi = async () => {
+  try {
+    const response = await api.get(`/`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 export const RegisterService = async (body: User) => {
   try {
