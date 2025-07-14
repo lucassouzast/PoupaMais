@@ -57,7 +57,12 @@ export const RightContainer = styled.div`
   flex: 1;
   min-width: 340px;
   max-width: 480px;
-  background: linear-gradient(135deg, rgb(15, 51, 31) 0%, #2c6e49 60%, #3aafa9 100%);
+  background: linear-gradient(
+    135deg,
+    rgb(15, 51, 31) 0%,
+    #2c6e49 60%,
+    #3aafa9 100%
+  );
   display: flex;
   flex-direction: column;
   align-items: center;

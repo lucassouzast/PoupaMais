@@ -18,7 +18,7 @@ export const Header = styled.header`
 `;
 
 export const HeaderText = styled.h1`
-  color: #111; 
+  color: #111;
   font-family: "Montserrat", sans-serif;
   font-size: 2.2rem;
   font-weight: 700;
@@ -59,7 +59,7 @@ export const LogoWrapper = styled.div`
   align-items: center;
 
   svg text {
-    fill: #111 !important; 
+    fill: #111 !important;
     color: #111 !important;
     transition: fill 0.2s;
   }
