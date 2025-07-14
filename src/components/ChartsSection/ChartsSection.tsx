@@ -1,18 +1,46 @@
-import { PieChart, Pie, Cell, Legend } from "recharts";
+import { PieChart, Pie, Cell} from "recharts";
 import { Icon } from "@iconify/react";
-import * as C from './styles'
+import * as C from "./styles";
+import { EntriesContext } from "../../contexts/EntriesContext";
+import { useContext} from "react";
+import { categories } from "../../data/categories";
 
-const data = [
-  { name: "Comida", value: 4200, color: "#e74c3c" },
-  { name: "Cartão", value: 300, color: "#1abc9c" },
-  { name: "Viagem", value: 300, color: "#f1c40f" },
-  { name: "Aluguel", value: 200, color: "#e67e22" },
-  { name: "Outros", value: 100, color: "#3498db" },
-];
+import { filterListByMonth, getCurrentMonth } from "../../helpers/dateFilters";
+
+export type totalsPerCategory = {
+  [category: string]: number;
+};
 
 export const MonthlyReport = () => {
+  const { entriesList } = useContext(EntriesContext);
+  const currentMonth = getCurrentMonth();
+  const filteredEntries = filterListByMonth(entriesList, currentMonth);
+  let totalsPerCategory: totalsPerCategory = {};
 
-    
+  filteredEntries.forEach((item) => {
+    if (item.category) {
+      if (totalsPerCategory[item.category]) {
+        totalsPerCategory[item.category] += item.value;
+      } else {
+        totalsPerCategory[item.category] = item.value;
+      }
+    } else {
+      const defaultCategory = "Uncategorized";
+      if (totalsPerCategory[defaultCategory]) {
+        totalsPerCategory[defaultCategory] += item.value;
+      } else {
+        totalsPerCategory[defaultCategory] = item.value;
+      }
+    }
+  });
+
+  const chartData = Object.keys(totalsPerCategory).map((category) => {
+    return {
+      name: categories[category].title,
+      value: totalsPerCategory[category],
+      color: categories[category].color,
+    };
+  });
 
   return (
     <C.Container>
@@ -28,20 +56,20 @@ export const MonthlyReport = () => {
           <C.ChartContainer>
             <PieChart width={200} height={200}>
               <Pie
-                data={data}
+                data={chartData.length > 0 ? chartData : []}
                 cx="50%"
                 cy="50%"
                 innerRadius={40}
                 outerRadius={70}
                 dataKey="value"
               >
-                {data.map((entry, index) => (
+                {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
             </PieChart>
             <C.LegendContainer>
-              {data.map((item, idx) => (
+              {chartData.map((item, idx) => (
                 <C.LegendItem key={idx}>
                   <C.Dot color={item.color} />
                   <span>{item.name}</span>
