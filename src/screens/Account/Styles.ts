@@ -10,11 +10,15 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   width: 100%;
-  padding: 32px 0 24px 0;
+  padding: 32px 0 64px 0;
   background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 32px 0 16px 0;
+  }
 `;
 
 export const HeaderText = styled.h1`
@@ -70,7 +74,7 @@ export const LogoutButton = styled.button`
   top: 24px;
   right: 32px;
   background: #fff;
-  color: #111; 
+  color: #111;
   border: 1.5px solid #2c6e49;
   border-radius: 8px;
   padding: 10px 22px 10px 16px;

@@ -7,9 +7,10 @@ export const Account = () => {
     <>
       <SideBar />
       <C.Container>
-        <C.Header></C.Header>
+        <C.Header>
+          <LogoPoupaMais color="#fff" />
+        </C.Header>
         <C.Body>
-          <LogoPoupaMais color="#111" />
           CONTA
         </C.Body>
       </C.Container>

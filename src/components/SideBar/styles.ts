@@ -12,6 +12,14 @@ export const Container = styled.div<{ $open: boolean }>`
   top: 0;
   left: 0;
   z-index: 100;
+
+  @media (max-width: 768px) {
+    width: 260px;
+    height: 100vh;
+    transform: ${(props) =>
+      props.$open ? "translateX(0)" : "translateX(-100%)"};
+    transition: transform 0.3s ease;
+  }
 `;
 
 export const Label = styled.span<{ $delay: number }>`
@@ -69,11 +77,26 @@ export const LogoutButton = styled.button`
   align-items: center;
   gap: 16px;
 `;
-export const DrawerButton = styled.div`
+
+export const DrawerButton = styled.button`
   ${buttonStyle}
-  height: 50px;
-  margin-top: 20px;
+  position: fixed;
+  top: 10px;
+  z-index: 120;
+  background: transparent;
+  border: none;
+  max-width: 260px;
+
+  @media (max-width: 768px) {
+    width: 360px;
+    position: absolute; 
+    top: 10px;
+    left: 10px;
+    z-index: 120;
+    border: 1px solid red;
+  }
 `;
+
 export const DrawerMenu = styled.div<{ $open: boolean }>`
   display: flex;
   flex-direction: column;
@@ -81,6 +104,24 @@ export const DrawerMenu = styled.div<{ $open: boolean }>`
   top: 60px;
   left: 20px;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  padding-top: 64px;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 260px;
+    height: calc(100vh - 60px);
+    background-color: #002516;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: ${(props) => (props.$open ? "1" : "0")};
+    pointer-events: ${(props) => (props.$open ? "auto" : "none")};
+    transform: ${(props) =>
+      props.$open ? "translateX(0)" : "translateX(-100%)"};
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 110;
+  }
 `;
 
 export const StyledIcon = styled(Icon)``;
