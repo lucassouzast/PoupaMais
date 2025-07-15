@@ -108,12 +108,12 @@ export const MonthlyReport = () => {
                   {formatCategoryPTBR(entry.category)}
                 </C.Type>
                 <span>{formatDayMonth(entry.date)}</span>
-                <span>
+                <div>
                 {new Intl.NumberFormat("pt-BR", {
                   style: "currency",
                   currency: "BRL",
                 }).format(entry?.value || 0)}
-                </span>
+                </div>
               </C.TableRow>
             ))}
           </C.Table>

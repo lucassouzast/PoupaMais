@@ -71,9 +71,18 @@ export const Table = styled.div`
 `;
 
 export const TableRow = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr 1fr; 
   font-size: 14px;
+  padding: 8px 0;
+  justify-items: start;
+
+  > span,
+  > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `;
 
 const categoryColors: Record<string, string> = {
