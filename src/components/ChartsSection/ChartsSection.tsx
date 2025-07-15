@@ -1,11 +1,29 @@
-import { PieChart, Pie, Cell} from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 import { Icon } from "@iconify/react";
 import * as C from "./styles";
 import { EntriesContext } from "../../contexts/EntriesContext";
-import { useContext} from "react";
+import { useContext } from "react";
 import { categories } from "../../data/categories";
 
 import { filterListByMonth, getCurrentMonth } from "../../helpers/dateFilters";
+
+function formatDayMonth(date: Date) {
+  const data = typeof date === "string" ? new Date(date) : date;
+  return data.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+  });
+}
+
+function formatCategoryPTBR(category: string) {
+  if (category === "rent") {
+    return "Aluguel"
+  } if (category === "food") {
+    return "Alimentação"
+  } if (category === "salary") {
+    return "Salário"
+  }
+}
 
 export type totalsPerCategory = {
   [category: string]: number;
@@ -83,30 +101,21 @@ export const MonthlyReport = () => {
           <C.Title>Historico de Transações</C.Title>
           <C.Divider />
           <C.Table>
-            <C.TableRow>
-              <span>Restaurante</span>
-              <C.Type className="despesa">Despesa</C.Type>
-              <span>15/02/2025</span>
-              <span>R$ 229,90</span>
-            </C.TableRow>
-            <C.TableRow>
-              <span>Quinzena</span>
-              <C.Type className="entrada">Entrada</C.Type>
-              <span>15/02/2025</span>
-              <span>R$ 984,90</span>
-            </C.TableRow>
-            <C.TableRow>
-              <span>Cinema</span>
-              <C.Type className="despesa">Despesa</C.Type>
-              <span>15/02/2025</span>
-              <span>R$ 349,90</span>
-            </C.TableRow>
-            <C.TableRow>
-              <span>Comissão</span>
-              <C.Type className="entrada">Entrada</C.Type>
-              <span>15/02/2025</span>
-              <span>R$ 469,90</span>
-            </C.TableRow>
+            {entriesList.map((entry) => (
+              <C.TableRow>
+                <span>{entry.title}</span>
+                <C.Type $color={entry.category}>
+                  {formatCategoryPTBR(entry.category)}
+                </C.Type>
+                <span>{formatDayMonth(entry.date)}</span>
+                <span>
+                {new Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                }).format(entry?.value || 0)}
+                </span>
+              </C.TableRow>
+            ))}
           </C.Table>
         </C.Card>
       </C.Content>

@@ -76,7 +76,14 @@ export const TableRow = styled.div`
   font-size: 14px;
 `;
 
-export const Type = styled.span`
+const categoryColors: Record<string, string> = {
+  food: "#0000ff",
+  rent: "#a52a2a",
+  salary: "#008000",
+  others: "#3498db",
+};
+
+export const Type = styled.span<{$color:string}>`
   padding: 2px 8px;
   border-radius: 4px;
   color: #fff;
@@ -89,4 +96,5 @@ export const Type = styled.span`
   &.despesa {
     background-color: darkred;
   }
+  background-color: ${(props) => categoryColors[props.$color] || "#ccc"};
 `;

@@ -93,7 +93,6 @@ export const DrawerButton = styled.button`
     top: 10px;
     left: 10px;
     z-index: 120;
-    border: 1px solid red;
   }
 `;
 
