@@ -47,7 +47,7 @@ export const SideBar = () => {
             </C.IconWrapper>
             {drawerOpen && <C.Label $delay={200}>Gráficos</C.Label>}
           </C.ChartsButton>
-          <C.AccountButton onClick={() => navigate("/account")}>
+          {/* <C.AccountButton onClick={() => navigate("/account")}>
             <C.IconWrapper>
               <Icon
                 icon="material-symbols:person"
@@ -57,7 +57,7 @@ export const SideBar = () => {
               />
             </C.IconWrapper>
             {drawerOpen && <C.Label $delay={300}>Conta</C.Label>}
-          </C.AccountButton>
+          </C.AccountButton> */}
           <C.LogoutButton onClick={logout}>
             <C.IconWrapper>
               <C.StyledIcon
