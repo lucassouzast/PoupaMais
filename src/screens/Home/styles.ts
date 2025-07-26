@@ -6,6 +6,8 @@ export const Container = styled.div`
   background: linear-gradient(120deg, #1a3c2c 0%, #2c6e49 40%, #3aafa9 100%);
   display: flex;
   flex-direction: column;
+
+
 `;
 
 export const Header = styled.header`
@@ -22,7 +24,7 @@ export const Header = styled.header`
 `;
 
 export const HeaderText = styled.h1`
-  color: #111; 
+  color: #111;
   font-family: "Montserrat", sans-serif;
   font-size: 2.2rem;
   font-weight: 700;
@@ -63,7 +65,7 @@ export const LogoWrapper = styled.div`
   align-items: center;
 
   svg text {
-    fill: #111 !important; 
+    fill: #111 !important;
     color: #111 !important;
     transition: fill 0.2s;
   }
@@ -74,7 +76,7 @@ export const LogoutButton = styled.button`
   top: 24px;
   right: 32px;
   background: #fff;
-  color: #111; 
+  color: #111;
   border: 1.5px solid #2c6e49;
   border-radius: 8px;
   padding: 10px 22px 10px 16px;

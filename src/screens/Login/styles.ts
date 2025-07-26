@@ -8,9 +8,15 @@ export const PageWrapper = styled.div`
   flex-direction: row-reverse;
   background: linear-gradient(120deg, #1a3c2c 0%, #2c6e49 40%, #3aafa9 100%);
 
-  @media (max-width: 900px) {
-    flex-direction: column;
-    background: #f6fff8;
+  @media (max-width: 768px) {
+    flex-direction: row;
+    background: #001f17;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 31, 23, 1) 0%,
+      rgba(0, 37, 22, 1) 35%,
+      rgba(0, 117, 68, 1) 100%
+    );
   }
 `;
 
@@ -79,6 +85,13 @@ export const RightContainer = styled.div`
     box-shadow: none;
     background: #f6fff8;
     padding: 32px 0;
+    background: #001f17;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 31, 23, 1) 0%,
+      rgba(0, 37, 22, 1) 35%,
+      rgba(0, 71, 42, 1) 100%
+    );
   }
 `;
 
@@ -99,6 +112,7 @@ export const LogoWrapper = styled.div`
     svg {
       width: 140px;
       height: 40px;
+      fill: black;
     }
     text {
       fill: #111 !important; // Força o texto da logo para preto no mobile

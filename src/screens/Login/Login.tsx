@@ -80,7 +80,7 @@ export const Login = () => {
     <C.PageWrapper>
       <C.RightContainer>
         <C.LogoWrapper>
-          <LogoPoupaMais color="#fff" />
+          <LogoPoupaMais/>
         </C.LogoWrapper>
         <C.StyledForm onSubmit={handleSubmit}>
           <SwitchTransition mode="out-in">

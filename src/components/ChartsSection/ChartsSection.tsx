@@ -78,7 +78,7 @@ export const MonthlyReport = () => {
                 cx="50%"
                 cy="50%"
                 innerRadius={40}
-                outerRadius={70}
+                outerRadius={90}
                 dataKey="value"
               >
                 {chartData.map((entry, index) => (

@@ -83,7 +83,7 @@ const Home = () => {
       <SideBar />
       <C.Container>
         <C.Header>
-          <LogoPoupaMais color="#fff" />
+          <LogoPoupaMais/>
         </C.Header>
         <C.Body>
           <InfoArea

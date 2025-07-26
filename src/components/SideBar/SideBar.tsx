@@ -21,7 +21,7 @@ export const SideBar = () => {
             style={{ color: " #fff" }}
           ></Icon>
         </C.IconWrapper>
-        {drawerOpen && <LogoPoupaMais color="#fff" />}
+        {drawerOpen && <LogoPoupaMais/>}
       </C.DrawerButton>
       <C.Container $open={drawerOpen}>
         <C.DrawerMenu $open={drawerOpen}>
