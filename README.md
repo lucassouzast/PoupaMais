@@ -3,7 +3,7 @@
 Aplicação web de controle financeiro pessoal, desenvolvida com React e TypeScript. Com uma interface moderna e funcional, permite registrar entradas e saídas, calcular saldos automaticamente e visualizar os dados por mês.
 
 ---
-![Apresentação de Usabilidade]([https://giphy.com/gifs/sxjTs2UlfRW6DBmoby](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmp4cTY3ZWlyMjYyOXVmYTJmODQ0NmNzdmN1a3kxdHliemx6aTZlYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/sxjTs2UlfRW6DBmoby/giphy.gif))
+![Apresentação de Usabilidade](https://giphy.com/gifs/sxjTs2UlfRW6DBmoby)
 
 
 ## 🚀 Sobre o Projeto
