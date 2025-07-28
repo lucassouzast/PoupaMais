@@ -38,6 +38,10 @@ const Home = () => {
 
 
   useEffect(() => {
+    loadEntries();
+  },[])
+
+  useEffect(() => {
     setFilteredList(filterListByMonth(entriesList, currentMonth, orderByDate));
   }, [entriesList, currentMonth, orderByDate]);
 

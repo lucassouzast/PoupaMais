@@ -1,9 +1,3 @@
-import React from "react";
-
-type LogoPoupaMaisProps = {
-  color: string;
-};
-
 const LogoPoupaMais = () => (
   <svg
     width="146"
