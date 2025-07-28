@@ -4,8 +4,12 @@ import * as C from "./styles";
 import { EntriesContext } from "../../contexts/EntriesContext";
 import { useContext } from "react";
 import { categories } from "../../data/categories";
-
-import { filterListByMonth, getCurrentMonth } from "../../helpers/dateFilters";
+import { useState } from "react";
+import {
+  filterListByMonth,
+  formatCurrentMonth,
+  getCurrentMonth,
+} from "../../helpers/dateFilters";
 
 function formatDayMonth(date: Date) {
   const data = typeof date === "string" ? new Date(date) : date;
@@ -17,11 +21,13 @@ function formatDayMonth(date: Date) {
 
 function formatCategoryPTBR(category: string) {
   if (category === "rent") {
-    return "Aluguel"
-  } if (category === "food") {
-    return "Alimentação"
-  } if (category === "salary") {
-    return "Salário"
+    return "Aluguel";
+  }
+  if (category === "food") {
+    return "Alimentação";
+  }
+  if (category === "salary") {
+    return "Salário";
   }
 }
 
@@ -30,8 +36,8 @@ export type totalsPerCategory = {
 };
 
 export const MonthlyReport = () => {
+  const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
   const { entriesList } = useContext(EntriesContext);
-  const currentMonth = getCurrentMonth();
   const filteredEntries = filterListByMonth(entriesList, currentMonth);
   let totalsPerCategory: totalsPerCategory = {};
 
@@ -60,6 +66,28 @@ export const MonthlyReport = () => {
     };
   });
 
+
+  const onMonthChange = (newMonth: string) => {
+    setCurrentMonth(newMonth);
+  };
+
+  const handlePrevMonth = () => {
+    let [year, month] = currentMonth.split("-");
+    let currentDate = new Date(parseInt(year), parseInt(month) - 1, 1);
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    onMonthChange(
+      `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`
+    );
+  };
+  const handleNextMonth = () => {
+    let [year, month] = currentMonth.split("-");
+    let currentDate = new Date(parseInt(year), parseInt(month) - 1, 1);
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    onMonthChange(
+      `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`
+    );
+  };
+
   return (
     <C.Container>
       <C.Header>
@@ -70,6 +98,11 @@ export const MonthlyReport = () => {
       <C.Content>
         <C.Card>
           <C.Title>Mês atual</C.Title>
+          <C.MonthArea>
+            <C.MonthArrow onClick={handlePrevMonth}>⬅️</C.MonthArrow>
+            <C.MonthTitle>{formatCurrentMonth(currentMonth)}</C.MonthTitle>
+            <C.MonthArrow onClick={handleNextMonth}>➡️</C.MonthArrow>
+          </C.MonthArea>
           <C.Divider />
           <C.ChartContainer>
             <PieChart width={200} height={200}>
@@ -101,18 +134,18 @@ export const MonthlyReport = () => {
           <C.Title>Historico de Transações</C.Title>
           <C.Divider />
           <C.Table>
-            {entriesList.map((entry) => (
-              <C.TableRow>
+            {filteredEntries.map((entry) => (
+              <C.TableRow key={entry._id || entry.title}>
                 <span>{entry.title}</span>
                 <C.Type $color={entry.category}>
                   {formatCategoryPTBR(entry.category)}
                 </C.Type>
                 <span>{formatDayMonth(entry.date)}</span>
                 <div>
-                {new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(entry?.value || 0)}
+                  {new Intl.NumberFormat("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  }).format(entry?.value || 0)}
                 </div>
               </C.TableRow>
             ))}

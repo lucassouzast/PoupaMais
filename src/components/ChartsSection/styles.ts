@@ -107,3 +107,35 @@ export const Type = styled.span<{$color:string}>`
   }
   background-color: ${(props) => categoryColors[props.$color] || "#ccc"};
 `;
+
+
+export const MonthArea = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 600px) {
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+`;
+export const MonthArrow = styled.div`
+  width: 40px;
+  text-align: center;
+  font-size: 25px;
+  cursor: pointer;
+  @media (max-width: 600px) {
+    font-size: 20px;
+  }
+`;
+
+export const MonthTitle = styled.div`
+  flex: 1;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
+`;
