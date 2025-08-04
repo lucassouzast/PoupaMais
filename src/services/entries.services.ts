@@ -1,11 +1,7 @@
 import api from "../config/api";
 
-type Entry = {
-  category: string;
-  title: string;
-  date: Date;
-  value: number;
-};
+import {Entry} from '../types/Entry'
+
 
 const getAuthHeaders = async () => {
   const token = await localStorage.getItem("token");
