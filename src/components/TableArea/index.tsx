@@ -1,15 +1,23 @@
 import * as C from "./styles";
 import { Item } from "../../types/Item";
-import { TableItem } from "../TableItem/";
+import { TableItem } from "../TableItem";
+import { CategoryItem } from "../../types/CategoryItem";
 
 type Props = {
   list: Item[];
-  handleDelItem: Function;
-  handleEditItem: Function;
-  functionSetDateOrder: Function;
+  handleDelItem: (id: string) => void;
+  handleEditItem: (item: Item) => void;
+  functionSetDateOrder: () => void;
+  allCategories: CategoryItem[]; // <- agora recebe a lista completa
 };
 
-export const TableArea = ({ list, handleDelItem, handleEditItem, functionSetDateOrder }: Props) => {
+export const TableArea = ({
+  list,
+  handleDelItem,
+  handleEditItem,
+  functionSetDateOrder,
+  allCategories,
+}: Props) => {
   return (
     <C.TableWrapper>
       <C.Table>
@@ -22,7 +30,15 @@ export const TableArea = ({ list, handleDelItem, handleEditItem, functionSetDate
         ) : (
           <>
             <C.TableHead>
-              <C.TableHeadColumn id="data" onClick={() => functionSetDateOrder()} style={{ cursor: "pointer" }}><div>Data<span>🔃</span></div></C.TableHeadColumn>
+              <C.TableHeadColumn
+                id="data"
+                onClick={functionSetDateOrder}
+                style={{ cursor: "pointer" }}
+              >
+                <div>
+                  Data<span>🔃</span>
+                </div>
+              </C.TableHeadColumn>
               <C.TableHeadColumn id="categoria">Categoria</C.TableHeadColumn>
               <C.TableHeadColumn id="titulo">Título</C.TableHeadColumn>
               <C.TableHeadColumn id="valor">Valor</C.TableHeadColumn>
@@ -33,12 +49,9 @@ export const TableArea = ({ list, handleDelItem, handleEditItem, functionSetDate
                 <TableItem
                   key={index}
                   item={item}
-                  deleteFunction={(id) => {
-                    handleDelItem(id);
-                  }}
-                  updateFunction={(item) => {
-                    handleEditItem(item);
-                  }}
+                  deleteFunction={() => handleDelItem(item._id!)}
+                  updateFunction={handleEditItem}
+                  allCategories={allCategories} // <- passa a lista completa
                 />
               ))}
             </C.TableBody>
