@@ -7,11 +7,10 @@ export const Container = styled.div<{ update?: boolean }>`
   padding: 20px;
   margin-top: 20px;
   display: flex;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 10px;
   font-size: 15px;
   font-weight: 600;
-  gap: 10px;
-  
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -19,16 +18,15 @@ export const Container = styled.div<{ update?: boolean }>`
     padding: 10px;
     gap: 8px;
     font-size: 13px;
-    width: 90%
-
-
+    width: 90%;
   }
+
   ${({ update }) =>
     update &&
     ` 
-      display: flex;
       flex-direction: row;
       margin-top: 50px;
+      width: 100%;      // <- mantém a largura no update
     `}
 `;
 
@@ -47,58 +45,57 @@ export const RowLabels = styled.div`
   }
 `;
 
-export const ButtonLabel = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 15px;
-  color: #333;
-  font-weight: 500;
-
-  @media (max-width: 600px) {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-`;
-
 export const Label = styled.label<{ update?: boolean }>`
   display: flex;
-  flex: 1;
   flex-direction: column;
   gap: 4px;
   font-size: 15px;
   color: #333;
   font-weight: 500;
+  position: relative;
+
+  flex: 1 1 150px; // tenta ocupar pelo menos 150px e expande se sobrar espaço
+  min-width: 120px;
 
   ${({ update }) =>
     update &&
     ` 
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 16px;
-    max-height: 150px;
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 16px;
+      max-height: 150px;
     `}
+
+  @media (max-width: 600px) {
+    flex: 1 1 100%;
+  }
+`;
+
+export const ButtonLabel = styled.div`
+  display: flex;
+  flex: 0 0 auto; 
+  align-items: flex-end; 
+  margin-top: 24px;
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
 `;
 
 export const Input = styled.input`
+  width: 100%; // ocupa o espaço do label
   padding: 0.5rem 0.8rem;
-  border: 1px solid #ccc;
   border-radius: 8px;
-  outline: none;
-  font-size: 15px;
-  font-family: "Poppins", sans-serif;
-  background: #f8f8f8;
-  transition: border 0.2s, box-shadow 0.2s;
-  box-sizing: border-box;
+  border: 1px solid #ccc;
   height: 40px;
+  box-sizing: border-box;
 
   &:focus {
     border: 1.5px solid #007bff;
     background: #f0f8ff;
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
   }
 
   &[type="date"] {
@@ -118,33 +115,8 @@ export const Input = styled.input`
   }
 `;
 
-export const Select = styled.select`
-  padding: 0.5rem 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  font-size: 15px;
-  font-family: "Poppins", sans-serif;
-  background: #f8f8f8;
-  transition: border 0.2s, box-shadow 0.2s;
-  box-sizing: border-box;
-  height: 40px;
-
-  &:focus {
-    border: 1.5px solid #007bff;
-    background: #f0f8ff;
-  }
-
-  @media (max-width: 600px) {
-    width: 100%;
-    font-size: 15px;
-  }
-`;
-
 export const Button = styled.button<{ variant?: "primary" | "danger" }>`
-  height: 40px;
   padding: 0.5rem 0.8rem;
-  margin-top: 1.5rem;
   max-width: 150px;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
@@ -156,6 +128,7 @@ export const Button = styled.button<{ variant?: "primary" | "danger" }>`
     variant === "danger" ? "#e74c3c" : "#007bff"};
   transition: background 0.2s, color 0.2s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: none;
 
   &:hover {
     background-color: ${({ variant }) =>
@@ -166,8 +139,36 @@ export const Button = styled.button<{ variant?: "primary" | "danger" }>`
   @media (max-width: 600px) {
     font-size: 15px;
     width: 100%;
-    bottom: 0;
     padding: 0.5rem 0;
     margin-top: 0.5rem;
+
+  }
+`;
+
+export const Dropdown = styled.ul`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  color: #000;
+  list-style: none;
+  padding: 4px 0;
+  margin: 4px 0 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+`;
+
+export const DropdownItem = styled.li`
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #f0f0f0;
   }
 `;
