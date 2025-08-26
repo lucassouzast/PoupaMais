@@ -35,11 +35,7 @@ const Home = () => {
 
   const { entriesList, loadEntries } = useContext(EntriesContext);
 
-  const fixedCategories: CategoryItem[] = [
-    { title: "Alimentação", color: "blue", expense: true },
-    { title: "Aluguel", color: "brown", expense: true },
-    { title: "Salário", color: "green", expense: false },
-  ];
+
 
   const [userCategories, setUserCategories] = useState<CategoryItem[]>([]);
 
@@ -110,7 +106,6 @@ const Home = () => {
 
           <InputArea
             onAdd={handleAddItem}
-            fixedCategories={fixedCategories}
             onNewCategory={(newCat: CategoryItem) =>
               setUserCategories((prev) => [...prev, newCat])
             }
@@ -137,7 +132,6 @@ const Home = () => {
               setIsOpen(false);
               setItem(null);
             }}
-            fixedCategories={fixedCategories}
             onNewCategory={(newCat: CategoryItem) =>
               setUserCategories((prev) => [...prev, newCat])
             }
