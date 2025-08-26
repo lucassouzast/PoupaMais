@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { EntriesContext } from "../../contexts/EntriesContext";
 
 // Tipos e helpers
-import { Item } from "../../types/Item";
+import { Item, NewItem } from "../../types/Item";
 import { filterListByMonth, getCurrentMonth } from "../../helpers/dateFilters";
 
 // Serviços
@@ -30,7 +30,7 @@ const Home = () => {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
 
-  const [item, setItem] = useState<Item | null>(null);
+  const [item, setItem] = useState<NewItem | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const { entriesList, loadEntries } = useContext(EntriesContext);
@@ -42,9 +42,6 @@ const Home = () => {
   ];
 
   const [userCategories, setUserCategories] = useState<CategoryItem[]>([]);
-
-  // Junta categorias fixas + dinâmicas
-  const allCategories = [...fixedCategories, ...userCategories];
 
 
   // Carrega entradas e categorias ao montar o componente
@@ -63,10 +60,10 @@ const Home = () => {
     let expenseCount = 0;
 
     for (let entry of filteredList) {
-      const cat = allCategories.find((c) => c.title === entry.category);
 
-      if (cat) {
-        if (cat.expense) expenseCount += entry.value;
+
+      if (entry.category) {
+        if (entry.category.expense) expenseCount += entry.value;
         else incomeCount += entry.value;
       } else {
         expenseCount += entry.value;
@@ -75,7 +72,7 @@ const Home = () => {
 
     setIncome(incomeCount);
     setExpense(expenseCount);
-  }, [filteredList, allCategories]);
+  }, [filteredList]);
 
   const handleMonthChange = (newMonth: string) => {
     setCurrentMonth(newMonth);
@@ -93,7 +90,7 @@ const Home = () => {
 
   const handleEditItem = (item: Item) => {
     setIsOpen(true);
-    setItem(item);
+    setItem({...item, category: item.category?._id || ''});
   };
 
   return (
@@ -124,7 +121,6 @@ const Home = () => {
             list={filteredList}
             handleDelItem={handleDelItem}
             handleEditItem={handleEditItem}
-            allCategories={allCategories} // <- passa aqui
           />
         </C.Body>
 
