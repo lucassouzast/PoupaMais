@@ -13,7 +13,6 @@ type Props = {
   onAdd: () => void;
   onDelete?: (id?: string) => void;
   item?: NewItem | null;
-  fixedCategories: CategoryItem[];
   onNewCategory: (cat: CategoryItem) => void;
 };
 
@@ -23,7 +22,6 @@ export const InputArea = ({
   onAdd,
   onDelete,
   item = null,
-  fixedCategories,
   onNewCategory,
 }: Props) => {
   const [dateField, setDateField] = useState(
