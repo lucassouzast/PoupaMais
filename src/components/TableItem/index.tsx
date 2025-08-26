@@ -14,14 +14,12 @@ type Props = {
   item: Item;
   updateFunction: (item: Item) => void;
   deleteFunction: (id: string) => void;
-  allCategories: CategoryItem[]; // recebe a lista completa
 };
 
 export const TableItem = ({
   item,
   updateFunction,
   deleteFunction,
-  allCategories,
 }: Props) => {
   // Mapeamento das categorias antigas para as novas
   const categoryMap: Record<string, string> = {
@@ -30,17 +28,11 @@ export const TableItem = ({
     salary: "Salário",
   };
 
-  // Traduz a categoria antiga para a nova
-  const mappedCategory = categoryMap[item.category] || item.category;
 
-  // Busca a categoria no allCategories
-  const cat = allCategories.find(
-    (c) => c.title.toLowerCase() === mappedCategory.toLowerCase()
-  );
 
-  const title = cat?.title || "Categoria Desconhecida";
-  const color = cat?.color || "gray";
-  const isExpense = cat?.expense ?? true;
+  const title = item.category?.title || "Categoria Desconhecida";
+  const color = item.category?.color || "gray";
+  const isExpense = item.category?.expense ?? true;
 
   return (
     <C.TableLine>

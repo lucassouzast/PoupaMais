@@ -8,7 +8,6 @@ type Props = {
   handleDelItem: (id: string) => void;
   handleEditItem: (item: Item) => void;
   functionSetDateOrder: () => void;
-  allCategories: CategoryItem[]; // <- agora recebe a lista completa
 };
 
 export const TableArea = ({
@@ -16,7 +15,6 @@ export const TableArea = ({
   handleDelItem,
   handleEditItem,
   functionSetDateOrder,
-  allCategories,
 }: Props) => {
   return (
     <C.TableWrapper>
@@ -51,7 +49,6 @@ export const TableArea = ({
                   item={item}
                   deleteFunction={() => handleDelItem(item._id!)}
                   updateFunction={handleEditItem}
-                  allCategories={allCategories} // <- passa a lista completa
                 />
               ))}
             </C.TableBody>
