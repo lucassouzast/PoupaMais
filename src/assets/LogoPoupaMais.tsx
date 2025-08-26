@@ -14,8 +14,8 @@ const LogoPoupaMais = () => (
       d="M131 31C139.284 31 146 24.2843 146 16C146 7.71573 139.284 1 131 1C122.716 1 116 7.71573 116 16C116 24.2843 122.716 31 131 31Z"
       fill="#68D391"
     />
-    <path d="M125 16H137" stroke="white" stroke-width="3" />
-    <path d="M131 10V22" stroke="white" stroke-width="3" />
+    <path d="M125 16H137" stroke="white" strokeWidth="3" />
+    <path d="M131 10V22" stroke="white" strokeWidth="3" />
   </svg>
 );
 
