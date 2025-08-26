@@ -1,5 +1,5 @@
 import * as C from "./styles";
-import { Item } from "../../types/Item";
+import { NewItem } from "../../types/Item";
 import { useEffect, useState } from "react";
 import { categories } from "../../data/categories";
 import { createEntry, updateEntry } from "../../services/entries.services";
@@ -12,9 +12,9 @@ import {
 type Props = {
   onAdd: () => void;
   onDelete?: (id?: string) => void;
-  item?: Item | null;
-  fixedCategories: CategoryItem[]; 
-  onNewCategory: (cat: CategoryItem) => void; 
+  item?: NewItem | null;
+  fixedCategories: CategoryItem[];
+  onNewCategory: (cat: CategoryItem) => void;
 };
 
 let objectTitles: string[] = Object.keys(categories);
@@ -26,7 +26,6 @@ export const InputArea = ({
   fixedCategories,
   onNewCategory,
 }: Props) => {
-
   const [dateField, setDateField] = useState(
     item ? item.date.toISOString().split("T")[0] : ""
   );
@@ -34,9 +33,7 @@ export const InputArea = ({
   const [valueField, setValueField] = useState(item ? `${item.value}` : "");
 
   const [categoriesList, setCategoriesList] = useState<CategoryItem[]>([]);
-  const [filteredCategories, setFilteredCategories] = useState<CategoryItem[]>(
-    []
-  );
+
   const [showDropdown, setShowDropdown] = useState(false);
   const [categoryField, setCategoryField] = useState(item ? item.category : "");
 
@@ -60,7 +57,7 @@ export const InputArea = ({
   }, []);
 
   const handleAddEvent = () => {
-    let newItem: Item = {
+    let newItem: NewItem = {
       date: new Date(dateField),
       category: categoryField,
       title: titleField,
@@ -72,6 +69,7 @@ export const InputArea = ({
       });
     } else {
       createEntry(newItem).then((res) => {
+        console.log(newItem);
         onAdd();
         setValueField("");
         setTitleField("");
@@ -83,17 +81,13 @@ export const InputArea = ({
   };
 
   const inputValidation = () => {
-    if (dateField == "") {
-      alert("O Campo DATA precisa ser preenchido!");
-    }
-    if (categoryField == "") {
-      alert("Você precisa especificar uma categoria!");
-    }
-    if (titleField == "") {
-      alert("Você precisa especificar um titulo!");
-    }
-    if (valueField == "") {
-      alert("Você precisa especificar um valor!");
+    if (
+      dateField == "" ||
+      categoryField == "" ||
+      titleField == "" ||
+      valueField == ""
+    ) {
+      alert("Todos os campos precisam ser preenchidos!");
     } else {
       handleAddEvent();
     }
@@ -114,72 +108,39 @@ export const InputArea = ({
 
         <C.Label htmlFor="select">
           Categoria:
-          <C.Input
-            type="text"
+          <C.Select
             id="category"
             required
             value={categoryField}
             onChange={(e) => {
               const value = e.target.value;
-              setCategoryField(value);
+              console.log(e);
+              if (value === "cadastro") {
+                alert("Você selecionou a nova categoria");
+              } else setCategoryField(value);
 
-              if (value.trim() === "") {
-                setFilteredCategories([]);
-                setShowDropdown(false);
-                return;
-              }
+              // if (value.trim() === "") {
+              //   setFilteredCategories([]);
+              //   setShowDropdown(false);
+              //   return;
+              // }
 
-              const results = categoriesList.filter((cat) =>
-                cat.title.toLowerCase().includes(value.toLowerCase())
-              );
+              // const results = categoriesList.filter((cat) =>
+              //   cat.title.toLowerCase().includes(value.toLowerCase())
+              // );
 
-              setFilteredCategories(results);
-              setShowDropdown(true);
+              // setFilteredCategories(results);
+              // setShowDropdown(true);
             }}
-            onFocus={() => {
-              if (filteredCategories.length > 0) setShowDropdown(true);
-            }}
-          />
-          {showDropdown && (
-            <C.Dropdown>
-              {filteredCategories.map((cat) => (
-                <C.DropdownItem
-                  key={cat._id}
-                  onClick={() => {
-                    setCategoryField(cat.title);
-                    setShowDropdown(false);
-                  }}
-                >
-                  {cat.title}
-                </C.DropdownItem>
-              ))}
-
-              {!filteredCategories.some(
-                (cat) => cat.title.toLowerCase() === categoryField.toLowerCase()
-              ) &&
-                categoryField.trim() !== "" && (
-                  <C.DropdownItem
-                    onClick={async () => {
-                      const newCat: CategoryItem = {
-                        title: categoryField,
-                        color: "gray",
-                        expense: true,
-                      };
-
-                      const createdCat = await createCategory(newCat);
-                      if (createdCat) {
-                        setCategoriesList((prev) => [...prev, createdCat.data]);
-                        onNewCategory?.(createdCat.data); 
-                        setCategoryField(createdCat.data.title);
-                        setShowDropdown(false);
-                      }
-                    }}
-                  >
-                    ➕ Criar nova categoria: <strong>{categoryField}</strong>
-                  </C.DropdownItem>
-                )}
-            </C.Dropdown>
-          )}
+          >
+            <option value=""></option>
+            {categoriesList.map((cat) => (
+              <option key={cat._id} value={cat._id}>
+                {cat.title}
+              </option>
+            ))}
+            <option value="cadastro">Nova categoria</option>
+          </C.Select>
         </C.Label>
 
         <C.Label htmlFor="title">
