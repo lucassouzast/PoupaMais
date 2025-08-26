@@ -92,7 +92,7 @@ const categoryColors: Record<string, string> = {
   others: "#3498db",
 };
 
-export const Type = styled.span<{$color:string}>`
+export const Type = styled.span<{color:string}>`
   padding: 2px 8px;
   border-radius: 4px;
   color: #fff;
@@ -105,7 +105,7 @@ export const Type = styled.span<{$color:string}>`
   &.despesa {
     background-color: darkred;
   }
-  background-color: ${(props) => categoryColors[props.$color] || "#ccc"};
+  background-color: ${(props) => props.color || "#ccc"};
 `;
 
 

@@ -2,7 +2,7 @@ import { PieChart, Pie, Cell } from "recharts";
 import { Icon } from "@iconify/react";
 import * as C from "./styles";
 import { EntriesContext } from "../../contexts/EntriesContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { categories } from "../../data/categories";
 import { useState } from "react";
 import {
@@ -10,6 +10,8 @@ import {
   formatCurrentMonth,
   getCurrentMonth,
 } from "../../helpers/dateFilters";
+import { CategoryItem } from "../../types/CategoryItem";
+import { getCategories } from "../../services/categories.services";
 
 function formatDayMonth(date: Date) {
   const data = typeof date === "string" ? new Date(date) : date;
@@ -17,18 +19,6 @@ function formatDayMonth(date: Date) {
     day: "2-digit",
     month: "2-digit",
   });
-}
-
-function formatCategoryPTBR(category: string) {
-  if (category === "rent") {
-    return "Aluguel";
-  }
-  if (category === "food") {
-    return "Alimentação";
-  }
-  if (category === "salary") {
-    return "Salário";
-  }
 }
 
 export type totalsPerCategory = {
@@ -39,14 +29,25 @@ export const MonthlyReport = () => {
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
   const { entriesList } = useContext(EntriesContext);
   const filteredEntries = filterListByMonth(entriesList, currentMonth);
+
+  const [categoriesList, setCategoriesList] = useState<CategoryItem[]>([]);
+
+  useEffect(() => {
+    getCategories().then((res) => {
+      if (res != undefined) {
+        setCategoriesList(res.data);
+      } else console.log(`a resposta esta vazia: ${res}`);
+    });
+  }, []);
+
   let totalsPerCategory: totalsPerCategory = {};
 
   filteredEntries.forEach((item) => {
     if (item.category) {
-      if (totalsPerCategory[item.category]) {
-        totalsPerCategory[item.category] += item.value;
+      if (totalsPerCategory[item.category._id]) {
+        totalsPerCategory[item.category._id] += item.value;
       } else {
-        totalsPerCategory[item.category] = item.value;
+        totalsPerCategory[item.category._id] = item.value;
       }
     } else {
       const defaultCategory = "Uncategorized";
@@ -59,13 +60,13 @@ export const MonthlyReport = () => {
   });
 
   const chartData = Object.keys(totalsPerCategory).map((category) => {
+    let cat = categoriesList.find((cat) => cat._id === category);
     return {
-      name: categories[category].title,
+      name: cat ? cat.title : "Sem titulo",
       value: totalsPerCategory[category],
-      color: categories[category].color,
+      color: cat ? cat.color : "gray",
     };
   });
-
 
   const onMonthChange = (newMonth: string) => {
     setCurrentMonth(newMonth);
@@ -75,17 +76,13 @@ export const MonthlyReport = () => {
     let [year, month] = currentMonth.split("-");
     let currentDate = new Date(parseInt(year), parseInt(month) - 1, 1);
     currentDate.setMonth(currentDate.getMonth() - 1);
-    onMonthChange(
-      `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`
-    );
+    onMonthChange(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`);
   };
   const handleNextMonth = () => {
     let [year, month] = currentMonth.split("-");
     let currentDate = new Date(parseInt(year), parseInt(month) - 1, 1);
     currentDate.setMonth(currentDate.getMonth() + 1);
-    onMonthChange(
-      `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`
-    );
+    onMonthChange(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}`);
   };
 
   return (
@@ -137,8 +134,8 @@ export const MonthlyReport = () => {
             {filteredEntries.map((entry) => (
               <C.TableRow key={entry._id || entry.title}>
                 <span>{entry.title}</span>
-                <C.Type $color={entry.category}>
-                  {formatCategoryPTBR(entry.category)}
+                <C.Type color={entry.category.color}>
+                  {entry.category.title}
                 </C.Type>
                 <span>{formatDayMonth(entry.date)}</span>
                 <div>
