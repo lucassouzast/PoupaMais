@@ -44,4 +44,8 @@ export const CloseButton = styled.button`
   line-height: 1;
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+  div:nth-child(2){
+    margin-top: 1rem;
+  }
+`;
