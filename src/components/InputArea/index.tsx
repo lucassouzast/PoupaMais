@@ -1,13 +1,13 @@
 import * as C from "./styles";
 import { NewItem } from "../../types/Item";
 import { useEffect, useState } from "react";
-import { categories } from "../../data/categories";
 import { createEntry, updateEntry } from "../../services/entries.services";
 import { CategoryItem } from "../../types/CategoryItem";
 import {
   createCategory,
   getCategories,
 } from "../../services/categories.services";
+import Modal from "../Modal";
 
 type Props = {
   onAdd: () => void;
@@ -16,24 +16,28 @@ type Props = {
   onNewCategory: (cat: CategoryItem) => void;
 };
 
-let objectTitles: string[] = Object.keys(categories);
+export type ItemCategory = {
+  title: string;
+  color: string;
+  expense: boolean;
+};
 
-export const InputArea = ({
-  onAdd,
-  onDelete,
-  item = null,
-  onNewCategory,
-}: Props) => {
+export const InputArea = ({ onAdd, onDelete, item = null }: Props) => {
   const [dateField, setDateField] = useState(
     item ? item.date.toISOString().split("T")[0] : ""
   );
   const [titleField, setTitleField] = useState(item ? item.title : "");
   const [valueField, setValueField] = useState(item ? `${item.value}` : "");
+  const [categoryField, setCategoryField] = useState(item ? item.category : "");
 
   const [categoriesList, setCategoriesList] = useState<CategoryItem[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [categoryField, setCategoryField] = useState(item ? item.category : "");
+  const [categoryForm, setCategoryForm] = useState<ItemCategory>({
+    title: "",
+    color: "#000000",
+    expense: false,
+  });
 
   useEffect(() => {
     getCategories().then((res) => {
@@ -46,7 +50,6 @@ export const InputArea = ({
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (!(e.target as HTMLElement).closest("#category")) {
-        setShowDropdown(false);
       }
     };
 
@@ -78,6 +81,25 @@ export const InputArea = ({
     }
   };
 
+  const handleAddCategory = () => {
+  const newCategory: ItemCategory = {
+    title: categoryForm.title,
+    color: categoryForm.color,
+    expense: categoryForm.expense,
+  };
+
+  createCategory(newCategory)
+    .then((res) => {
+      const createdCategory: CategoryItem = res.data;
+      setCategoriesList([...categoriesList, createdCategory]);
+      setIsOpen(false);
+    })
+    .catch((err) => {
+      console.error("Erro ao criar categoria:", err);
+      alert("Não foi possível criar a categoria.");
+    });
+};
+
   const inputValidation = () => {
     if (
       dateField == "" ||
@@ -90,6 +112,8 @@ export const InputArea = ({
       handleAddEvent();
     }
   };
+
+
 
   return (
     <>
@@ -114,7 +138,7 @@ export const InputArea = ({
               const value = e.target.value;
               console.log(e);
               if (value === "cadastro") {
-                alert("Você selecionou a nova categoria");
+                setIsOpen(true);
               } else setCategoryField(value);
 
               // if (value.trim() === "") {
@@ -168,7 +192,63 @@ export const InputArea = ({
           </C.ButtonLabel>
         )}
       </C.Container>
+      {
+        <Modal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          title="Adicionar categoria:"
+        >
+          <C.Container>
+            <C.Label>
+              Titulo:
+              <C.Input
+                required
+                type="text"
+                id="title"
+                onChange={(e) =>
+                  setCategoryForm({ ...categoryForm, title: e.target.value })
+                }
+              />
+            </C.Label>
 
+            <C.Label>
+              Cor:
+              <C.Input
+                required
+                type="color"
+                id="color"
+                onChange={(e) =>
+                  setCategoryForm({ ...categoryForm, color: e.target.value })
+                }
+              />
+            </C.Label>
+
+            <C.Label>
+              Despesa ou Entrada?
+              <C.Select
+                required
+                id="expense"
+                onChange={(e) =>
+                  setCategoryForm({
+                    ...categoryForm,
+                    expense: e.target.value === "true",
+                  })
+                }
+              >
+                <option value=""></option>
+                <option value="false">Entrada</option>
+                <option value="true">Despesa</option>
+              </C.Select>
+            </C.Label>
+
+            <C.ButtonLabel>
+              <C.Button type="button" onClick={handleAddCategory}>
+                Adicionar
+              </C.Button>
+            </C.ButtonLabel>
+          </C.Container>
+        </Modal>
+      }
       {item !== null && (
         <C.RowLabels>
           <C.Button

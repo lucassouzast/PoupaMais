@@ -35,6 +35,7 @@ export const RowLabels = styled.div`
   align-items: center;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 10px;
   gap: 16px;
 
   @media (max-width: 600px) {
@@ -140,11 +141,31 @@ export const Input = styled.input`
       url('data:image/svg+xml;utf8,<svg fill="gray" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1z"/></svg>')
       no-repeat right 0.75em center/1.2em auto;
     cursor: pointer;
+
+    
   }
 
   &[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
   }
+
+  &[type="color"] {
+  padding: 0;        
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;   
+  background: none;  
+}
+
+  &[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+
+&[type="color"]::-webkit-color-swatch {
+  border-radius: 8px; 
+  border: none;       
+}
+
 
   @media (max-width: 600px) {
     width: 100%;
