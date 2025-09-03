@@ -1,7 +1,7 @@
 import api from "../config/api";
 
 import { CategoryItem } from "../types/CategoryItem";
-import { ItemCategory } from "../components/InputArea";
+import { ItemCategory } from "../components/SelectCategories";
 
 const getAuthHeaders =  async() => {
     const token = localStorage.getItem("token");
