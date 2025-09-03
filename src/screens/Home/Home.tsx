@@ -53,7 +53,7 @@ const Home = () => {
     let expenseCount = 0;
 
     for (let entry of filteredList) {
-      if (entry.category) {
+      if (entry.category && typeof entry.category === "object" && "expense" in entry.category) {
         if (entry.category.expense) expenseCount += entry.value;
         else incomeCount += entry.value;
       } else {
@@ -81,7 +81,13 @@ const Home = () => {
 
   const handleEditItem = (item: Item) => {
     setIsOpen(true);
-    setItem({ ...item, category: item.category?._id || "" });
+    setItem({
+      ...item,
+      category:
+        typeof item.category === "object" && item.category !== null
+          ? item.category._id || ""
+          : item.category || "",
+    });
   };
 
   return (

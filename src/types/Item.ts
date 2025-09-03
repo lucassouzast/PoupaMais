@@ -2,7 +2,7 @@ import { CategoryItem } from "./CategoryItem";
 
 export type Item = {
     date: Date;
-    category: CategoryItem; 
+    category: CategoryItem |string; 
     title: string;
     value: number;
     _id?: string;

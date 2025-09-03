@@ -28,11 +28,20 @@ export const TableItem = ({
     salary: "Salário",
   };
 
+  const title =
+    typeof item.category === "object" && item.category !== null
+      ? item.category.title
+      : "Categoria Desconhecida";
 
+  const color =
+    typeof item.category === "object" && item.category !== null
+      ? item.category.color
+      : "gray";
 
-  const title = item.category?.title || "Categoria Desconhecida";
-  const color = item.category?.color || "gray";
-  const isExpense = item.category?.expense ?? true;
+  const isExpense =
+    typeof item.category === "object" && item.category !== null
+      ? item.category.expense
+      : true;
 
   return (
     <C.TableLine>

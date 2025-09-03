@@ -44,10 +44,12 @@ export const MonthlyReport = () => {
 
   filteredEntries.forEach((item) => {
     if (item.category) {
-      if (totalsPerCategory[item.category._id]) {
-        totalsPerCategory[item.category._id] += item.value;
-      } else {
-        totalsPerCategory[item.category._id] = item.value;
+      if (typeof item.category === "object" && item.category !== null) {
+        if (totalsPerCategory[item.category._id]) {
+          totalsPerCategory[item.category._id] += item.value;
+        } else {
+          totalsPerCategory[item.category._id] = item.value;
+        }
       }
     } else {
       const defaultCategory = "Uncategorized";
@@ -134,8 +136,18 @@ export const MonthlyReport = () => {
             {filteredEntries.map((entry) => (
               <C.TableRow key={entry._id || entry.title}>
                 <span>{entry.title}</span>
-                <C.Type color={entry.category.color}>
-                  {entry.category.title}
+                <C.Type
+                  color={
+                    typeof entry.category === "object" &&
+                    entry.category !== null
+                      ? entry.category.color
+                      : "gray"
+                  }
+                >
+                  {typeof entry.category === "object" &&
+                  entry.category !== null
+                    ? entry.category.title
+                    : "Categoria Desconhecida"}
                 </C.Type>
                 <span>{formatDayMonth(entry.date)}</span>
                 <div>
