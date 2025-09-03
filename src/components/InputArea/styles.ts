@@ -11,6 +11,7 @@ export const Container = styled.div<{ update?: boolean }>`
   gap: 10px;
   font-size: 15px;
   font-weight: 600;
+  width: 100%;
 
   @media (max-width: 600px) {
     flex-direction: column;
@@ -55,8 +56,7 @@ export const Label = styled.label<{ update?: boolean }>`
   font-weight: 500;
   position: relative;
 
-  flex: 1 1 150px; // tenta ocupar pelo menos 150px e expande se sobrar espaço
-  min-width: 120px;
+  flex: 0 0 140px; 
 
   ${({ update }) =>
     update &&
@@ -84,7 +84,7 @@ export const ButtonLabel = styled.div`
 
 
 export const Select = styled.select`
-  width: 100%; // ocupa o espaço do label
+  width: 100%;
   padding: 0.5rem 0.8rem;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -96,20 +96,6 @@ export const Select = styled.select`
     background: #f0f8ff;
   }
 
-  @media (max-width: 600px) {
-    width: 100%;
-  }
-
-  &[type="date"] {
-    background: #f0f4ff
-      url('data:image/svg+xml;utf8,<svg fill="gray" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1z"/></svg>')
-      no-repeat right 0.75em center/1.2em auto;
-    cursor: pointer;
-  }
-
-  &[type="date"]::-webkit-calendar-picker-indicator {
-    opacity: 0;
-  }
 
   @media (max-width: 600px) {
     width: 100%;
@@ -117,10 +103,8 @@ export const Select = styled.select`
   }
 `;
 
-
-
 export const Input = styled.input`
-  width: 100%; // ocupa o espaço do label
+  width: 100%; 
   padding: 0.5rem 0.8rem;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -137,6 +121,7 @@ export const Input = styled.input`
   }
 
   &[type="date"] {
+    width: 100%;
     background: #f0f4ff
       url('data:image/svg+xml;utf8,<svg fill="gray" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zm0-13H5V6h14v1z"/></svg>')
       no-repeat right 0.75em center/1.2em auto;
@@ -200,33 +185,5 @@ export const Button = styled.button<{ variant?: "primary" | "danger" }>`
     padding: 0.5rem 0;
     margin-top: 0.5rem;
 
-  }
-`;
-
-export const Dropdown = styled.ul`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #fff;
-  color: #000;
-  list-style: none;
-  padding: 4px 0;
-  margin: 4px 0 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 10;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-`;
-
-export const DropdownItem = styled.li`
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background 0.15s;
-
-  &:hover {
-    background: #f0f0f0;
   }
 `;
