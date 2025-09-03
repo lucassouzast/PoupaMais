@@ -10,7 +10,8 @@ import {
 import Modal from "../Modal";
 
 import Select, { components, OptionProps } from "react-select";
-import { FaTrashAlt, FaPen } from "react-icons/fa";
+import { useContext } from "react";
+import { EntriesContext } from "../../contexts/EntriesContext";
 
 export type ItemCategory = {
   title: string;
@@ -31,6 +32,8 @@ export const SelectCategory = ({ value, onChange }: SelectCategoryProps) => {
     color: "#000000",
     expense: false,
   });
+
+  const { loadEntries } = useContext(EntriesContext);
 
   const [editingCategory, setEditingCategory] = useState<CategoryItem | null>(
     null
@@ -339,6 +342,7 @@ const CustomOption = (props: OptionProps<CategoryItem, false>) => {
                   prev.filter((cat) => cat._id !== categoryToDelete._id)
                 );
                 setCategoryToDelete(null);
+                loadEntries(); 
               }}
             >
               Deletar
