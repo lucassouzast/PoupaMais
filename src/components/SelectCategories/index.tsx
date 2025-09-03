@@ -10,7 +10,7 @@ import {
 import Modal from "../Modal";
 
 import Select, { components, OptionProps } from "react-select";
-import { FaRegTrashCan, FaPencil } from "react-icons/fa6";
+import { FaTrashAlt, FaPen } from "react-icons/fa";
 
 export type ItemCategory = {
   title: string;
@@ -102,14 +102,14 @@ export const SelectCategory = ({ value, onChange }: SelectCategoryProps) => {
     >
       <span>{data.title}</span>
       <span style={{ display: "flex", gap: "8px" }}>
-        <FaPencil
+        <FaPen
           style={{ cursor: "pointer" }}
           onClick={(e) => {
             e.stopPropagation();
             setEditingCategory(data);
           }}
         />
-        <FaRegTrashCan
+        <FaTrashAlt
           style={{ cursor: "pointer" }}
           onClick={(e) => {
             e.stopPropagation();
