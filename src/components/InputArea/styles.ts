@@ -27,7 +27,7 @@ export const Container = styled.div<{ update?: boolean }>`
     ` 
       flex-direction: row;
       margin-top: 50px;
-      width: 100%;      // <- mantém a largura no update
+      width: 100%;     
     `}
 `;
 
