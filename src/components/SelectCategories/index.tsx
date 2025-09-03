@@ -66,60 +66,59 @@ export const SelectCategory = ({ value, onChange }: SelectCategoryProps) => {
   };
 
   const CustomOption = (props: OptionProps<CategoryItem, false>) => {
-  const { data, innerProps, isFocused } = props;
+    const { data, innerProps, isFocused } = props;
 
-  if (data._id === "add-new") {
+    if (data._id === "add-new") {
+      return (
+        <div
+          {...innerProps}
+          style={{
+            padding: "8px 12px",
+            cursor: "pointer",
+            fontWeight: "bold",
+            color: "#007bff",
+            backgroundColor: isFocused ? "#d0e0ff" : "#fff",
+          }}
+        >
+          {data.title}
+        </div>
+      );
+    }
+
     return (
       <div
         {...innerProps}
         style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
           padding: "8px 12px",
+          gap: "8px",
           cursor: "pointer",
-          fontWeight: "bold",
-          color: "#007bff",
-        backgroundColor: isFocused ? "#d0e0ff" :  "#fff" ,
-
+          backgroundColor: isFocused ? "#d0e0ff" : "#fff",
+          borderBottom: "1px solid rgb(204, 204, 204)",
         }}
       >
-        {data.title}
+        <span>{data.title}</span>
+        <span style={{ display: "flex", gap: "8px" }}>
+          <FaPen
+            style={{ cursor: "pointer" }}
+            onClick={(e: React.MouseEvent<SVGElement, MouseEvent>) => {
+              e.stopPropagation();
+              setEditingCategory(data);
+            }}
+          />
+          <FaTrashAlt
+            style={{ cursor: "pointer" }}
+            onClick={(e: React.MouseEvent<SVGElement, MouseEvent>) => {
+              e.stopPropagation();
+              setCategoryToDelete(data);
+            }}
+          />
+        </span>
       </div>
     );
-  }
-
-  return (
-    <div
-      {...innerProps}
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "8px 12px",
-        gap: "8px",
-        cursor: "pointer",
-        backgroundColor: isFocused ? "#d0e0ff" :  "#fff" ,
-        borderBottom: "1px solid rgb(204, 204, 204)"
-      }}
-    >
-      <span>{data.title}</span>
-      <span style={{ display: "flex", gap: "8px" }}>
-        <FaPen
-          style={{ cursor: "pointer" }}
-          onClick={(e) => {
-            e.stopPropagation();
-            setEditingCategory(data);
-          }}
-        />
-        <FaTrashAlt
-          style={{ cursor: "pointer" }}
-          onClick={(e) => {
-            e.stopPropagation();
-            setCategoryToDelete(data);
-          }}
-        />
-      </span>
-    </div>
-  );
-};
+  };
 
   const saveEdit = async () => {
     if (!editingCategory) return;
@@ -206,7 +205,7 @@ export const SelectCategory = ({ value, onChange }: SelectCategoryProps) => {
                 onChange={(e) =>
                   setCategoryForm({ ...categoryForm, title: e.target.value })
                 }
-                />
+              />
             </C.Label>
 
             <C.Label>
@@ -216,9 +215,9 @@ export const SelectCategory = ({ value, onChange }: SelectCategoryProps) => {
                 type="color"
                 id="color"
                 onChange={(e) =>
-                    setCategoryForm({ ...categoryForm, color: e.target.value })
+                  setCategoryForm({ ...categoryForm, color: e.target.value })
                 }
-                />
+              />
             </C.Label>
 
             <C.Label style={{ flex: 2 }}>
@@ -284,7 +283,7 @@ export const SelectCategory = ({ value, onChange }: SelectCategoryProps) => {
               />
             </C.Label>
 
-            <C.Label style={{flex: 2}}>
+            <C.Label style={{ flex: 2 }}>
               Despesa ou Entrada:
               <C.Select
                 value={editingCategory.expense ? "true" : "false"}
